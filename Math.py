@@ -6,3 +6,4 @@ def test():
     print(x * 1)
 
 test()
+
