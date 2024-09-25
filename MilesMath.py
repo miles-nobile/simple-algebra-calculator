@@ -44,7 +44,7 @@ def pairSort(pair = "0,0",pair1 = "0,0"):
 
     except:
         print("Please type in valid ordered pairs like (2,8) or -4,0")
-        test()
+        pointSlopeToSlopeIntercept()
         pairSuccess = False
 
 
@@ -59,14 +59,14 @@ def slopeFind(rize = 0 ,run = 1):
     except ZeroDivisionError:
         print("run can't be 0")
         success = False
-        test()
+        pointSlopeToSlopeIntercept()
     except:
         print("Please type in valid rize and run like rize = 2 and run = 1")
-        test()
+        pointSlopeToSlopeIntercept()
         success = False
 
 
-def test():
+def pointSlopeToSlopeIntercept():
     # used so the calculations aren't repeated
     global pairSuccess
     global success
@@ -87,4 +87,4 @@ def test():
 
     pairSuccess = True
 
-test()
+pointSlopeToSlopeIntercept()
