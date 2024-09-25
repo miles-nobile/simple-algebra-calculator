@@ -20,6 +20,7 @@ def pointSlopeEquation():
     elif (-x*slope)+y < 0.0 and not slope.is_integer() and not yIntercept.is_integer():
         print(f"y = {Fraction(slope)}x {Fraction((-x * slope) + y)}")
 
+
 def pairSort(pair = "0,0",pair1 = "0,0"):
     global x
     global y
@@ -44,7 +45,7 @@ def pairSort(pair = "0,0",pair1 = "0,0"):
 
     except:
         print("Please type in valid ordered pairs like (2,8) or -4,0")
-        test()
+        ()
         pairSuccess = False
 
 
@@ -59,14 +60,14 @@ def slopeFind(rize = 0 ,run = 1):
     except ZeroDivisionError:
         print("run can't be 0")
         success = False
-        test()
+        ()
     except:
         print("Please type in valid rize and run like rize = 2 and run = 1")
-        test()
+        ()
         success = False
 
 
-def test():
+def pointSlopeToSlopeIntercept():
     # used so the calculations aren't repeated
     global pairSuccess
     global success
@@ -88,4 +89,5 @@ def test():
 
     pairSuccess = True
 
-test()
+
+pointSlopeToSlopeIntercept()
