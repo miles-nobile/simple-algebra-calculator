@@ -66,7 +66,7 @@ def test():
         slopeFind(rize,run)
 
     if pairSuccess and success:
-        print(f"x = {x} y = {y}")
+        print(f"y={slope}x+{(-x*slope)+y}")
 
     pairSuccess = True
 
