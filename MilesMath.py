@@ -31,7 +31,7 @@ def pointSlopeEquation():
     elif (-x*slope)+y < 0.0 and not slope.is_integer() and not yIntercept.is_integer():
         print(f"y = {Fraction(slope)}x {Fraction((-x * slope) + y)}")
 
-def pairSort(pair = "0,0",pair1 = "0,0"):
+def pairSort(pair = "0,0", programNumber = 0, pair1 = "0,0"):
     global x
     global y
     global x1
@@ -55,7 +55,10 @@ def pairSort(pair = "0,0",pair1 = "0,0"):
 
     except:
         print("Please type in valid ordered pairs like (2,8) or -4,0")
-        pointSlopeToSlopeIntercept()
+        if programNumber == 1:
+            pointSlopeToSlopeIntercept()
+        if programNumber == 2:
+            findSlopeFromPoint()
         pairSuccess = False
 
 
@@ -85,12 +88,12 @@ def pointSlopeToSlopeIntercept():
     pairSuccess = False
 
     pair = input("Point = ")
-    pairSort(pair)
+    pairSort(pair,1)
 
     if pairSuccess:
         rize = input("Rize = ")
         run = input("Run = ")
-        slopeFind(rize,run)
+        slopeFind(rize,run,)
 
     if pairSuccess and success:
         pointSlopeEquation()
@@ -102,7 +105,7 @@ def findSlopeFromPoint():
     pairSuccess = False
     point = input("First point = ")
     point1 = input("Second point = ")
-    pairSort(point, point1)
+    pairSort(point,2, point1,)
 
     if pairSuccess:
         findSlopeFromPointEquation()
@@ -114,4 +117,3 @@ def findSlopeFromPoint():
 
 
 
-findSlopeFromPoint()
