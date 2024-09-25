@@ -1,13 +1,24 @@
-
+from fractions import Fraction
 
 
 def pointSlopeEquation():
-    if (-x*slope)+y > 0 and slope.is_integer():
-        print(f"y = {slope}x +{(-x * slope) + y}")
+    yIntercept = (-x * slope) + y
+    if (-x*slope)+y > 0 and slope.is_integer() and yIntercept.is_integer():
+        print(f"y = {int(slope)}x +{int((-x * slope) + y)}")
     elif (-x*slope)+y == 0.0 and slope.is_integer():
-        print(f"y = {slope}x")
-    elif (-x*slope)+y < 0.0 and slope.is_integer():
-        print(f"y = {slope}x {(-x * slope) + y}")
+        print(f"y = {int(slope)}x")
+    elif (-x*slope)+y < 0.0 and slope.is_integer() and yIntercept.is_integer():
+        print(f"y = {int(slope)}x {int((-x * slope) + y)}")
+    elif (-x*slope)+y > 0 and not slope.is_integer() and yIntercept.is_integer():
+        print(f"y = {Fraction(slope)}x +{int((-x * slope) + y)}")
+    elif (-x*slope)+y == 0.0 and not slope.is_integer():
+        print(f"y = {Fraction(slope)}x")
+    elif (-x*slope)+y < 0.0 and not slope.is_integer() and yIntercept.is_integer():
+        print(f"y = {Fraction(slope)}x {int((-x * slope) + y)}")
+    elif (-x*slope)+y > 0 and not slope.is_integer() and not yIntercept.is_integer():
+        print(f"y = {Fraction(slope)}x +{Fraction((-x * slope) + y)}")
+    elif (-x*slope)+y < 0.0 and not slope.is_integer() and not yIntercept.is_integer():
+        print(f"y = {Fraction(slope)}x {Fraction((-x * slope) + y)}")
 
 def pairSort(pair = "0,0",pair1 = "0,0"):
     global x
