@@ -86,4 +86,3 @@ def pointSlopeToSlopeIntercept():
         pointSlopeEquation()
 
     pairSuccess = True
-Module
