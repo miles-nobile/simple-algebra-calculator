@@ -1,5 +1,16 @@
 from fractions import Fraction
 
+def findSlopeFromPointEquation():
+    global Slope
+    global printSlope
+    global rize
+    global run
+    rize = y1-y
+    run = x1-x
+    Slope = rize / run
+    if not Slope.is_integer():
+        printSlope = Fraction(Slope)
+
 
 def pointSlopeEquation():
     yIntercept = (-x * slope) + y
@@ -73,7 +84,6 @@ def pointSlopeToSlopeIntercept():
     success = False
     pairSuccess = False
 
-    # gets info
     pair = input("Point = ")
     pairSort(pair)
 
@@ -86,3 +96,22 @@ def pointSlopeToSlopeIntercept():
         pointSlopeEquation()
 
     pairSuccess = True
+
+def findSlopeFromPoint():
+    global pairSuccess
+    pairSuccess = False
+    point = input("First point = ")
+    point1 = input("Second point = ")
+    pairSort(point, point1)
+
+    if pairSuccess:
+        findSlopeFromPointEquation()
+        print(f"The slope is {Slope}")
+        if input("would you like to solve for slope intercept (yes/no): ") == "yes":
+            slopeFind(rize,run)
+            pointSlopeEquation()
+
+
+
+
+findSlopeFromPoint()
