@@ -48,7 +48,7 @@ def pairSort(pair = "0,0",pair1 = "0,0"):
         pairSuccess = False
 
 
-def slopeFind(rize = 0 ,run = 1):
+def slopeFind(rize = "0" ,run = "1"):
     global slope
     global success
     try:
@@ -86,5 +86,4 @@ def pointSlopeToSlopeIntercept():
         pointSlopeEquation()
 
     pairSuccess = True
-
-pointSlopeToSlopeIntercept()
+Module
