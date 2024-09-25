@@ -1,5 +1,14 @@
 
 
+
+def pointSlopeEquation():
+    if (-x*slope)+y > 0 and slope.is_integer():
+        print(f"y = {slope}x +{(-x * slope) + y}")
+    elif (-x*slope)+y == 0.0 and slope.is_integer():
+        print(f"y = {slope}x")
+    elif (-x*slope)+y < 0.0 and slope.is_integer():
+        print(f"y = {slope}x {(-x * slope) + y}")
+
 def pairSort(pair = "0,0",pair1 = "0,0"):
     global x
     global y
@@ -63,7 +72,8 @@ def test():
         slopeFind(rize,run)
 
     if pairSuccess and success:
-        print(f"y={slope}x+{(-x*slope)+y}")
+        pointSlopeEquation()
+
 
     pairSuccess = True
 
