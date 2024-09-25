@@ -20,6 +20,7 @@ def pointSlopeEquation():
     elif (-x*slope)+y < 0.0 and not slope.is_integer() and not yIntercept.is_integer():
         print(f"y = {Fraction(slope)}x {Fraction((-x * slope) + y)}")
 
+
 def pairSort(pair = "0,0",pair1 = "0,0"):
     global x
     global y
