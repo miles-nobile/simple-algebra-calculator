@@ -27,6 +27,7 @@ def pairSort(pair = "0,0",pair1 = "0,0"):
         test()
         pairSuccess = False
 
+
 def slopeFind(rize = 0 ,run = 1):
     global slope
     global success
@@ -43,10 +44,6 @@ def slopeFind(rize = 0 ,run = 1):
         print("Please type in valid rize and run like rize = 2 and run = 1")
         test()
         success = False
-
-
-
-
 
 
 def test():
@@ -71,7 +68,3 @@ def test():
     pairSuccess = True
 
 test()
-
-
-
-
