@@ -86,7 +86,6 @@ def pointSlopeToSlopeIntercept():
     if pairSuccess and success:
         pointSlopeEquation()
 
-
     pairSuccess = True
 
 
