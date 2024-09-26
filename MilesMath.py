@@ -12,24 +12,63 @@ def findSlopeFromPointEquation():
         printSlope = Fraction(Slope)
 
 
-def pointSlopeEquation():
-    yIntercept = (-x * slope) + y
-    if (-x*slope)+y > 0 and slope.is_integer() and yIntercept.is_integer():
-        print(f"y = {int(slope)}x +{int((-x * slope) + y)}")
-    elif (-x*slope)+y == 0.0 and slope.is_integer():
-        print(f"y = {int(slope)}x")
-    elif (-x*slope)+y < 0.0 and slope.is_integer() and yIntercept.is_integer():
-        print(f"y = {int(slope)}x {int((-x * slope) + y)}")
-    elif (-x*slope)+y > 0 and not slope.is_integer() and yIntercept.is_integer():
-        print(f"y = {Fraction(slope)}x +{int((-x * slope) + y)}")
-    elif (-x*slope)+y == 0.0 and not slope.is_integer():
-        print(f"y = {Fraction(slope)}x")
-    elif (-x*slope)+y < 0.0 and not slope.is_integer() and yIntercept.is_integer():
-        print(f"y = {Fraction(slope)}x {int((-x * slope) + y)}")
-    elif (-x*slope)+y > 0 and not slope.is_integer() and not yIntercept.is_integer():
-        print(f"y = {Fraction(slope)}x +{Fraction((-x * slope) + y)}")
-    elif (-x*slope)+y < 0.0 and not slope.is_integer() and not yIntercept.is_integer():
-        print(f"y = {Fraction(slope)}x {Fraction((-x * slope) + y)}")
+def pointSlopeEquation(slope, yIntercept, equals ="y"):
+    if yIntercept > 0 and slope.is_integer() and yIntercept.is_integer():
+        print(f"{equals} = {int(slope)}x +{int(yIntercept)}")
+    elif yIntercept == 0.0 and slope.is_integer():
+        print(f"{equals} = {int(slope)}x")
+    elif yIntercept < 0.0 and slope.is_integer() and yIntercept.is_integer():
+        print(f"{equals} = {int(slope)}x {int(yIntercept)}")
+    elif yIntercept > 0 and not slope.is_integer() and yIntercept.is_integer():
+        print(f"{equals} = {Fraction(slope)}x +{int(yIntercept)}")
+    elif yIntercept == 0.0 and not slope.is_integer():
+        print(f"{equals} = {Fraction(slope)}x")
+    elif yIntercept < 0.0 and not slope.is_integer() and yIntercept.is_integer():
+        print(f"{equals} = {Fraction(slope)}x {int(yIntercept)}")
+    elif yIntercept > 0 and not slope.is_integer() and not yIntercept.is_integer():
+        print(f"{equals} = {Fraction(slope)}x +{Fraction(yIntercept)}")
+    elif yIntercept < 0.0 and not slope.is_integer() and not yIntercept.is_integer():
+        print(f"{equals} = {Fraction(slope)}x {Fraction(yIntercept)}")
+
+
+def xToYConverter(programNumber = 1,slope1=0.0,yIntercept1=0.0,):
+    run = True
+    print("Type stop to exit\n")
+    if programNumber == 1:
+        fOfxIn = input("f(x) = ")
+    while run:
+        try:
+            xIn = input("x = ")
+            if xIn == "stop":
+                run = False
+                programNumber = 0
+
+            else:
+                xIn = float(xIn)
+
+            if programNumber ==0:
+                print("good bye!")
+                run = False
+
+            if programNumber == 1:
+                fOfx = fOfx.replace(" ", "")
+                slope, yIntercept = fOfx.split("x")
+                if slope == "":
+                    slope = "1"
+                if yIntercept == "":
+                    yIntercept = "0"
+                yIntercept = float(yIntercept)
+                slope = float(slope)
+                print("test")
+                print(f"y = {(slope*xIn)+yIntercept}")
+
+            if programNumber == 2:
+                print(f"y = {(slope1*xIn)+yIntercept1}")
+
+
+        except:
+            print("test")
+
 
 def pairSort(pair = "0,0", programNumber = 0, pair1 = "0,0"):
     global x
@@ -82,7 +121,8 @@ def slopeFind(rize = "0" ,run = "1"):
 
 def transformationEquation(gOfx,fOfx):
     global slope
-    global yIntercept1
+    global yIntercept
+    global transformationSuccess
     try:
         gOfx = gOfx.replace(" ", "")
         gOfx = gOfx.replace("(", "")
@@ -91,24 +131,38 @@ def transformationEquation(gOfx,fOfx):
         parenthesesIn, parenthesesOut = gOfx.split(")")
 
         fOfx = fOfx.replace(" ","")
-        fOfx = fOfx.replace("+","")
-        slope, yIntercept1 = fOfx.split("x")
-        yIntercept1 = float(yIntercept1)
+        slope, yIntercept = fOfx.split("x")
+        if slope == "":
+            slope = "1"
+        if yIntercept == "":
+            yIntercept = "0"
+        yIntercept = float(yIntercept)
         slope = float(slope)
-        if parenthesesIn.startswith("+"):
-            amount = parenthesesIn.replace("+","")
-            amount = float(amount)
-            print(f"g(x) = {slope}x +{(slope * amount) + yIntercept1}")
+
+        if parenthesesIn.startswith("+") or parenthesesIn.startswith("-"):
+            amount = float(parenthesesIn)
+            yIntercept = (slope * amount) + yIntercept
+            pointSlopeEquation(slope, yIntercept, "g(x)")
+
+        elif parenthesesOut.startswith("+") or parenthesesOut.startswith("-"):
+            amount = float(parenthesesOut)
+            yIntercept = amount + yIntercept
+            pointSlopeEquation(slope, yIntercept, "g(x)")
+
         elif parenthesesIn.startswith("*"):
-            print("change slope x")
-        elif parenthesesIn.startswith("-"):
-            print("right")
-        elif parenthesesOut.startswith("+"):
-            print("up")
+            parenthesesIn = parenthesesIn.replace("*", "")
+            amount = float(parenthesesIn)
+            slope = slope * amount
+            pointSlopeEquation(slope, yIntercept, "g(x)")
+
         elif parenthesesOut.startswith("*"):
-            print("change slope y")
-        elif parenthesesOut.startswith("-"):
-            print("down")
+            parenthesesOut = parenthesesOut.replace("*","")
+            amount = float(parenthesesOut)
+            slope = slope * amount
+            yIntercept = yIntercept * amount
+            pointSlopeEquation(slope, yIntercept, "g(x)")
+        
+        transformationSuccess = True
     except:
         print("test")
 
@@ -129,9 +183,11 @@ def pointSlopeToSlopeIntercept():
         slopeFind(rize,run,)
 
     if pairSuccess and success:
-        pointSlopeEquation()
+        yIntercept = (-x * slope) + y
+        pointSlopeEquation(slope, yIntercept)
 
     pairSuccess = True
+
 
 def findSlopeFromPoint():
     global pairSuccess
@@ -147,12 +203,16 @@ def findSlopeFromPoint():
             slopeFind(rize,run)
             pointSlopeEquation()
 
-def transformation():
 
+def transformation():
+    global transformationSuccess
+    transformationSuccess = False
+    
     fOfx =input("f(x) = ")
     gOfx = input("g(x) = ")
     transformationEquation(gOfx,fOfx)
-    print()
+    if transformationSuccess and input("Would you like to use x to y converter(yes/no): ") == "yes":
+        xToYConverter(2, slope, yIntercept)
 
-transformation()
+
 
