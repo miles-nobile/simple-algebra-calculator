@@ -80,6 +80,39 @@ def slopeFind(rize = "0" ,run = "1"):
         success = False
 
 
+def transformationEquation(gOfx,fOfx):
+    global slope
+    global yIntercept1
+    try:
+        gOfx = gOfx.replace(" ", "")
+        gOfx = gOfx.replace("(", "")
+        gOfx = gOfx.replace("x", "")
+        gOfx = gOfx.replace("f", "")
+        parenthesesIn, parenthesesOut = gOfx.split(")")
+
+        fOfx = fOfx.replace(" ","")
+        fOfx = fOfx.replace("+","")
+        slope, yIntercept1 = fOfx.split("x")
+        yIntercept1 = float(yIntercept1)
+        slope = float(slope)
+        if parenthesesIn.startswith("+"):
+            amount = parenthesesIn.replace("+","")
+            amount = float(amount)
+            print(f"g(x) = {slope}x +{(slope * amount) + yIntercept1}")
+        elif parenthesesIn.startswith("*"):
+            print("change slope x")
+        elif parenthesesIn.startswith("-"):
+            print("right")
+        elif parenthesesOut.startswith("+"):
+            print("up")
+        elif parenthesesOut.startswith("*"):
+            print("change slope y")
+        elif parenthesesOut.startswith("-"):
+            print("down")
+    except:
+        print("test")
+
+
 def pointSlopeToSlopeIntercept():
     # used so the calculations aren't repeated
     global pairSuccess
@@ -114,6 +147,12 @@ def findSlopeFromPoint():
             slopeFind(rize,run)
             pointSlopeEquation()
 
+def transformation():
 
+    fOfx =input("f(x) = ")
+    gOfx = input("g(x) = ")
+    transformationEquation(gOfx,fOfx)
+    print()
 
+transformation()
 
