@@ -1,5 +1,6 @@
 from fractions import Fraction
 
+
 def findSlopeFromPointEquation():
     global Slope
     global printSlope
@@ -213,6 +214,4 @@ def transformation():
     transformationEquation(gOfx,fOfx)
     if transformationSuccess and input("Would you like to use x to y converter(yes/no): ") == "yes":
         xToYConverter(2, slope, yIntercept)
-
-
 
