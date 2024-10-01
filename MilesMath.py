@@ -1,3 +1,4 @@
+import fractions
 from fractions import Fraction
 
 
@@ -11,6 +12,13 @@ def findSlopeFromPointEquation():
     Slope = rize / run
     if not Slope.is_integer():
         printSlope = Fraction(Slope).limit_denominator()
+
+
+def standardEquation(a,b,c):
+    if b > 0:
+        print(f"{a}x +{b}y = {c}")
+    elif b < 0:
+        print(f"{a}x {b}y = {c}")
 
 
 def pointSlopeEquation(slope, yIntercept, equals ="y"):
@@ -130,13 +138,23 @@ def transformationEquation(gOfx,fOfx):
         gOfx = gOfx.replace("x", "")
         gOfx = gOfx.replace("f", "")
         parenthesesIn, parenthesesOut = gOfx.split(")")
+        if parenthesesIn.__contains__("/"):
+            parenthesesIn = Fraction(parenthesesIn).numerator/Fraction(parenthesesIn).limit_denominator().denominator
+        if parenthesesOut.__contains__("/"):
+            parenthesesOut = Fraction(parenthesesOut).numerator/Fraction(parenthesesOut).limit_denominator().denominator
 
         fOfx = fOfx.replace(" ","")
         slope, yIntercept = fOfx.split("x")
         if slope == "":
             slope = "1"
+        if slope.__contains__("/"):
+            slope = Fraction(slope).numerator/Fraction(slope).limit_denominator().denominator
+
         if yIntercept == "":
             yIntercept = "0"
+        if yIntercept.__contains__("/"):
+            yIntercept = Fraction(yIntercept).numerator/Fraction(yIntercept).limit_denominator().denominator
+
         yIntercept = float(yIntercept)
         slope = float(slope)
 
@@ -223,6 +241,9 @@ def standardToSlopeIntercept():
         equation =equation.replace("y","")
         left,right = equation.split("=")
         x,y = left.split("x")
+        if right == "":
+            right == 0.0
+
         y = float(y)
         yIntercept = float(right)/y
         slope = -float(x)/y
@@ -238,26 +259,36 @@ def slopeInterceptToStandard():
     try:
         equation =equation.replace(" ","")
         x,yIntercept = equation.split("x")
+        if yIntercept == "":
+            yIntercept == 0.0
+        elif yIntercept.__contains__("/"):
+            yIntercept = Fraction(yIntercept).numerator/Fraction(yIntercept).limit_denominator().denominator
+        else:
+            yIntercept = float(yIntercept)
         y = 1.0
-        x = float(x)
-        yIntercept = float(yIntercept)
+
+        if x.__contains__("/"):
+            x = Fraction(x).numerator/Fraction(x).limit_denominator().denominator
+
+        x = -float(x)
         if not x.is_integer():
             fraction = Fraction(x)
-            x = fraction.denominator * x
-            y = fraction.denominator * y
-            yIntercept = fraction.denominator * yIntercept
+            x = fraction.limit_denominator().denominator * x
+            y = fraction.limit_denominator().denominator * y
+            yIntercept = fraction.limit_denominator().denominator * yIntercept
 
         if not yIntercept.is_integer():
             fraction = Fraction(yIntercept)
-            x = fraction.denominator * x
-            y = fraction.denominator * y
-            yIntercept = fraction.denominator * yIntercept
-        if x > 0:
+            x = fraction.limit_denominator().denominator * x
+            y = fraction.limit_denominator().denominator * y
+            yIntercept = fraction.limit_denominator().denominator * yIntercept
+        if x < 0:
             x = -x
             y = -y
             yIntercept = -yIntercept
+        standardEquation(x,y,yIntercept)
 
     except:
-        print("please type a valid standard form equation like 2x + 3y = 12")
-        standardToSlopeIntercept()
+        print("please type a valid slope intercept form equation like y = 3x +2")
+        slopeInterceptToStandard()
 
