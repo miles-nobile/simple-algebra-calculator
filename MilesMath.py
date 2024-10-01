@@ -232,3 +232,20 @@ def standardToSlopeIntercept():
         print("please type a valid standard form equation like 2x + 3y = 12")
         standardToSlopeIntercept()
 
+
+def slopeInterceptToStandard():
+    equation = input("Equation in standard form: ")
+    try:
+        equation =equation.replace(" ","")
+        equation =equation.replace("y","")
+        left,right = equation.split("=")
+        x,y = left.split("x")
+        y = float(y)
+        yIntercept = float(right)/y
+        slope = -float(x)/y
+        pointSlopeEquation(slope, yIntercept)
+
+    except:
+        print("please type a valid standard form equation like 2x + 3y = 12")
+        standardToSlopeIntercept()
+
