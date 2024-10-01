@@ -215,3 +215,19 @@ def transformation():
     if transformationSuccess and input("Would you like to use x to y converter(yes/no): ") == "yes":
         xToYConverter(2, slope, yIntercept)
 
+
+def standardToSlopeIntercept():
+    equation = input("Equation in standard form: ")
+    try:
+        equation =equation.replace(" ","")
+        equation =equation.replace("y","")
+        left,right = equation.split("=")
+        x,y = left.split("x")
+        y = float(y)
+        yIntercept = float(right)/y
+        slope = -float(x)/y
+        pointSlopeEquation(slope, yIntercept)
+
+    except:
+        print("test")
+
