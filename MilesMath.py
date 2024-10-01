@@ -234,16 +234,28 @@ def standardToSlopeIntercept():
 
 
 def slopeInterceptToStandard():
-    equation = input("Equation in standard form: ")
+    equation = input("y = ")
     try:
         equation =equation.replace(" ","")
-        equation =equation.replace("y","")
-        left,right = equation.split("=")
-        x,y = left.split("x")
-        y = float(y)
-        yIntercept = float(right)/y
-        slope = -float(x)/y
-        pointSlopeEquation(slope, yIntercept)
+        x,yIntercept = equation.split("x")
+        y = 1.0
+        x = float(x)
+        yIntercept = float(yIntercept)
+        if not x.is_integer():
+            fraction = Fraction(x)
+            x = fraction.denominator * x
+            y = fraction.denominator * y
+            yIntercept = fraction.denominator * yIntercept
+
+        if not yIntercept.is_integer():
+            fraction = Fraction(yIntercept)
+            x = fraction.denominator * x
+            y = fraction.denominator * y
+            yIntercept = fraction.denominator * yIntercept
+        if x > 0:
+            x = -x
+            y = -y
+            yIntercept = -yIntercept
 
     except:
         print("please type a valid standard form equation like 2x + 3y = 12")
