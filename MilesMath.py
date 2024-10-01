@@ -9,7 +9,7 @@ def findSlopeFromPointEquation():
     run = x1-x
     Slope = rize / run
     if not Slope.is_integer():
-        printSlope = Fraction(Slope)
+        printSlope = Fraction(Slope).limit_denominator()
 
 
 def pointSlopeEquation(slope, yIntercept, equals ="y"):
@@ -20,15 +20,15 @@ def pointSlopeEquation(slope, yIntercept, equals ="y"):
     elif yIntercept < 0.0 and slope.is_integer() and yIntercept.is_integer():
         print(f"{equals} = {int(slope)}x {int(yIntercept)}")
     elif yIntercept > 0 and not slope.is_integer() and yIntercept.is_integer():
-        print(f"{equals} = {Fraction(slope)}x +{int(yIntercept)}")
+        print(f"{equals} = {Fraction(slope).limit_denominator()}x +{int(yIntercept)}")
     elif yIntercept == 0.0 and not slope.is_integer():
-        print(f"{equals} = {Fraction(slope)}x")
+        print(f"{equals} = {Fraction(slope).limit_denominator()}x")
     elif yIntercept < 0.0 and not slope.is_integer() and yIntercept.is_integer():
-        print(f"{equals} = {Fraction(slope)}x {int(yIntercept)}")
+        print(f"{equals} = {Fraction(slope).limit_denominator()}x {int(yIntercept)}")
     elif yIntercept > 0 and not slope.is_integer() and not yIntercept.is_integer():
-        print(f"{equals} = {Fraction(slope)}x +{Fraction(yIntercept)}")
+        print(f"{equals} = {Fraction(slope).limit_denominator()}x +{Fraction(yIntercept).limit_denominator()}")
     elif yIntercept < 0.0 and not slope.is_integer() and not yIntercept.is_integer():
-        print(f"{equals} = {Fraction(slope)}x {Fraction(yIntercept)}")
+        print(f"{equals} = {Fraction(slope).limit_denominator()}x {Fraction(yIntercept).limit_denominator()}")
 
 
 def xToYConverter(programNumber = 1,slope1=0.0,yIntercept1=0.0,):
