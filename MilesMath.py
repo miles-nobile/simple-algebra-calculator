@@ -229,5 +229,6 @@ def standardToSlopeIntercept():
         pointSlopeEquation(slope, yIntercept)
 
     except:
-        print("test")
+        print("please type a valid standard form equation like 2x + 3y = 12")
+        standardToSlopeIntercept()
 
