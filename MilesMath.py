@@ -1,4 +1,3 @@
-import fractions
 from fractions import Fraction
 
 
