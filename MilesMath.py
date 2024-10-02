@@ -41,6 +41,7 @@ def pointSlopeEquation(slope, yIntercept, equals ="y"):
 
 
 def xToYConverter(programNumber = 1,slope1=0.0,yIntercept1=0.0,):
+    global fOfx
     run = True
     print("Type stop to exit\n")
     if programNumber == 1:
@@ -219,8 +220,10 @@ def findSlopeFromPoint():
         findSlopeFromPointEquation()
         print(f"The slope is {Slope}")
         if input("would you like to solve for slope intercept (yes/no): ") == "yes":
+            # noinspection PyTypeChecker
             slopeFind(rize,run)
-            pointSlopeEquation()
+            yIntercept = (-x * slope) + y
+            pointSlopeEquation(slope, yIntercept)
 
 
 def transformation():
@@ -242,7 +245,7 @@ def standardToSlopeIntercept():
         left,right = equation.split("=")
         x,y = left.split("x")
         if right == "":
-            right == 0.0
+            var = right == 0.0
 
         y = float(y)
         yIntercept = float(right)/y
@@ -260,7 +263,7 @@ def slopeInterceptToStandard():
         equation =equation.replace(" ","")
         x,yIntercept = equation.split("x")
         if yIntercept == "":
-            yIntercept == 0.0
+            var = yIntercept == 0.0
         elif yIntercept.__contains__("/"):
             yIntercept = Fraction(yIntercept).numerator/Fraction(yIntercept).limit_denominator().denominator
         else:
