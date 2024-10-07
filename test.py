@@ -13,16 +13,21 @@ class App(customtkinter.CTk):
         # Themes: "blue" (standard), "green", "dark-blue"
         customtkinter.set_default_color_theme("blue")
         def run():
-            if combobox.get() == "point slope to slope intercept":
+            if combobox.get() == "slope from two points":
                 GUImath.findSlopeFromPoint(firstPoint.get(), secondPoint.get())
                 answer.configure(text=GUImath.solved)
         def combobox_callback(choice):
-            if choice == "point slope to slope intercept":
+            answer.configure(text="")
+            if choice == "slope from two points":
+                firstPointText.grid(row=2, column=0, sticky="w", padx=60)
                 firstPoint.grid(row=3, column=0, pady=5)
-                secondPoint.grid(row=4, column=0, pady=5)
+                secondPointText.grid(row=4, column=0, sticky="w", padx=60)
+                secondPoint.grid(row=5, column=0, pady=5)
 
             else:
+                firstPointText.grid_remove()
                 firstPoint.grid_remove()
+                secondPointText.grid_remove()
                 secondPoint.grid_remove()
 
         # Window/App Customization
@@ -38,6 +43,7 @@ class App(customtkinter.CTk):
         self.grid_rowconfigure(4, weight=0)
         self.grid_rowconfigure(5, weight=0)
         self.grid_rowconfigure(6, weight=0)
+        self.grid_rowconfigure(7, weight=0)
 
 
 
@@ -55,9 +61,15 @@ class App(customtkinter.CTk):
                                         anchor="w",
                                         text_color="white")
 
-        firstPoint = customtkinter.CTkEntry(self, placeholder_text="First Point")
+        firstPoint = customtkinter.CTkEntry(self, placeholder_text="1,2")
 
-        secondPoint = customtkinter.CTkEntry(self, placeholder_text="Second Point")
+        secondPointText = customtkinter.CTkLabel(self,
+                                        text="Second Point",
+                                        font=("Arial", 13),
+                                        anchor="w",
+                                        text_color="white")
+
+        secondPoint = customtkinter.CTkEntry(self, placeholder_text="-4,0")
 
         runButton = customtkinter.CTkButton(self, text="Run",command=run )
 
@@ -69,9 +81,12 @@ class App(customtkinter.CTk):
 
         title.grid(row=0, column=0,pady=10)
         combobox.grid(row=1,column=0,pady=20)
-        firstPointText.grid(row=2, column=0,sticky="w",padx=60)
-        runButton.grid(row=5,column=0,pady=20)
-        answer.grid(row=6, column=0,pady=10,sticky="nsew")
+        firstPointText.grid(row=2, column=0, sticky="w", padx=60)
+        firstPoint.grid(row=3, column=0, pady=5)
+        secondPointText.grid(row=4, column=0, sticky="w", padx=60)
+        secondPoint.grid(row=5, column=0, pady=5)
+        runButton.grid(row=6,column=0,pady=20)
+        answer.grid(row=7, column=0,pady=10,sticky="nsew")
 
 app = App()
 app.mainloop()

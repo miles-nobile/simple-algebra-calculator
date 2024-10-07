@@ -3,15 +3,15 @@ from fractions import Fraction
 global solved
 
 def findSlopeFromPointEquation():
-    global Slope
+    global slope
     global printSlope
     global rize
     global run
     rize = y1 - y
     run = x1 - x
-    Slope = rize / run
-    if not Slope.is_integer():
-        printSlope = Fraction(Slope).limit_denominator()
+    slope = rize / run
+    if not slope.is_integer():
+        printSlope = Fraction(slope).limit_denominator()
 
 
 def standardEquation(a, b, c):
@@ -22,22 +22,23 @@ def standardEquation(a, b, c):
 
 
 def pointSlopeEquation(slope, yIntercept, equals="y"):
+    global solved
     if yIntercept > 0 and slope.is_integer() and yIntercept.is_integer():
-        print(f"{equals} = {int(slope)}x +{int(yIntercept)}")
+        solved = f"{equals} = {int(slope)}x +{int(yIntercept)}"
     elif yIntercept == 0.0 and slope.is_integer():
-        print(f"{equals} = {int(slope)}x")
+        solved = f"{equals} = {int(slope)}x"
     elif yIntercept < 0.0 and slope.is_integer() and yIntercept.is_integer():
-        print(f"{equals} = {int(slope)}x {int(yIntercept)}")
+        solved = f"{equals} = {int(slope)}x {int(yIntercept)}"
     elif yIntercept > 0 and not slope.is_integer() and yIntercept.is_integer():
-        print(f"{equals} = {Fraction(slope).limit_denominator()}x +{int(yIntercept)}")
+        solved = f"{equals} = {Fraction(slope).limit_denominator()}x +{int(yIntercept)}"
     elif yIntercept == 0.0 and not slope.is_integer():
-        print(f"{equals} = {Fraction(slope).limit_denominator()}x")
+        solved = f"{equals} = {Fraction(slope).limit_denominator()}x"
     elif yIntercept < 0.0 and not slope.is_integer() and yIntercept.is_integer():
-        print(f"{equals} = {Fraction(slope).limit_denominator()}x {int(yIntercept)}")
+        solved = f"{equals} = {Fraction(slope).limit_denominator()}x {int(yIntercept)}"
     elif yIntercept > 0 and not slope.is_integer() and not yIntercept.is_integer():
-        print(f"{equals} = {Fraction(slope).limit_denominator()}x +{Fraction(yIntercept).limit_denominator()}")
+        solved = f"{equals} = {Fraction(slope).limit_denominator()}x +{Fraction(yIntercept).limit_denominator()}"
     elif yIntercept < 0.0 and not slope.is_integer() and not yIntercept.is_integer():
-        print(f"{equals} = {Fraction(slope).limit_denominator()}x {Fraction(yIntercept).limit_denominator()}")
+        solved = f"{equals} = {Fraction(slope).limit_denominator()}x {Fraction(yIntercept).limit_denominator()}"
 
 
 def xToYConverter(programNumber=1, slope1=0.0, yIntercept1=0.0, ):
@@ -214,16 +215,12 @@ def findSlopeFromPoint(point,point1):
     global pairSuccess
     global solved
     pairSuccess = False
-    pairSort(point, 2, point1, )
+    pairSort(point, 2, point1,)
 
     if pairSuccess:
         findSlopeFromPointEquation()
-        solved = f"The slope is {Slope}"
-        if 1 == 13:
-            # noinspection PyTypeChecker
-            slopeFind(rize, run)
-            yIntercept = (-x * slope) + y
-            pointSlopeEquation(slope, yIntercept)
+        yIntercept = (-x * slope) + y
+        pointSlopeEquation(slope, yIntercept)
 
 
 def transformation():

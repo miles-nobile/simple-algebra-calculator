@@ -2,15 +2,15 @@ from fractions import Fraction
 
 
 def findSlopeFromPointEquation():
-    global Slope
+    global slope
     global printSlope
     global rize
     global run
     rize = y1-y
     run = x1-x
-    Slope = rize / run
-    if not Slope.is_integer():
-        printSlope = Fraction(Slope).limit_denominator()
+    slope = rize / run
+    if not slope.is_integer():
+        printSlope = Fraction(slope).limit_denominator()
 
 
 def standardEquation(a,b,c):
@@ -213,14 +213,13 @@ def findSlopeFromPoint():
     pairSuccess = False
     point = input("First point = ")
     point1 = input("Second point = ")
-    pairSort(point,2, point1,)
+    pairSort(point,2, point1)
 
     if pairSuccess:
         findSlopeFromPointEquation()
-        print(f"The slope is {Slope}")
+        print(f"The slope is {slope}")
         if input("would you like to solve for slope intercept (yes/no): ") == "yes":
             # noinspection PyTypeChecker
-            slopeFind(rize,run)
             yIntercept = (-x * slope) + y
             pointSlopeEquation(slope, yIntercept)
 
