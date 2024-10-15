@@ -189,7 +189,7 @@ def transformationEquation(gOfx, fOfx):
         print("test")
 
 
-def pointSlopeToSlopeIntercept():
+def pointSlopeToSlopeIntercept(pair,):
     # used so the calculations aren't repeated
     global pairSuccess
     global success
