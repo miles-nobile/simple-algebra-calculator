@@ -14,8 +14,12 @@ class App(customtkinter.CTk):
         customtkinter.set_default_color_theme("blue")
         def run():
             if combobox.get() == "slope from two points":
-                GUImath.findSlopeFromPoint(firstPoint.get(), secondPoint.get())
-                answer.configure(text=GUImath.solved)
+                if not firstPoint.get() ==""  and not secondPoint.get()  == "":
+                    answer.configure(text_color="red")
+                    answer.configure(text="Both boxes must be filled in")
+                else:
+                    GUImath.findSlopeFromPoint(firstPoint.get(), secondPoint.get())
+                    answer.configure(text=GUImath.solved)
         def combobox_callback(choice):
             answer.configure(text="")
             if choice == "slope from two points":
