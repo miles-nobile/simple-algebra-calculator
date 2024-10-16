@@ -189,27 +189,27 @@ def transformationEquation(gOfx, fOfx):
         print("test")
 
 
-def pointSlopeToSlopeIntercept(pair,):
+def pointSlopeToSlopeIntercept(pair, slopein):
     # used so the calculations aren't repeated
     global pairSuccess
     global success
     success = False
     pairSuccess = False
 
-    pair = input("Point = ")
-    pairSort(pair, 1)
+    pairSort(pair,1)
 
     if pairSuccess:
-        rize = input("Rize = ")
-        run = input("Run = ")
-        slopeFind(rize, run, )
-
+        try:
+            slope = Fraction(slopein).limit_denominator()
+            slope = slope.numerator/slope.denominator
+            success = True
+        except:
+            pass
     if pairSuccess and success:
         yIntercept = (-x * slope) + y
         pointSlopeEquation(slope, yIntercept)
 
     pairSuccess = True
-
 
 def findSlopeFromPoint(point,point1):
     global pairSuccess
