@@ -16,18 +16,16 @@ class App(customtkinter.CTk):
             answer.configure(text_color="grey")
             if combobox.get() == "slope from two points":
                 if box1.get() ==""  or box2.get()  == "":
-                    answer.configure(text_color="red")
-                    answer.configure(text="Both boxes must be filled in")
+                    answer.configure(text="Both boxes must be filled in",text_color="red")
                 else:
                     GUImath.findSlopeFromPoint(box1.get(), box2.get())
-                    answer.configure(text=GUImath.solved)
+                    answer.configure(text=GUImath.solved,text_color=GUImath.color)
             elif combobox.get() == "point slope to slope intercept":
                 if box1.get() ==""  or box2.get()  == "":
-                    answer.configure(text_color="red")
-                    answer.configure(text="Both boxes must be filled in")
+                    answer.configure(text="Both boxes must be filled in",text_color="red")
                 else:
                     GUImath.pointSlopeToSlopeIntercept(box1.get(), box2.get())
-                    answer.configure(text=GUImath.solved)
+                    answer.configure(text=GUImath.solved,text_color=GUImath.color)
         def combobox_callback(choice):
             answer.configure(text="")
             box1.delete(0,100000)

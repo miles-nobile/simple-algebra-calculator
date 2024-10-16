@@ -1,6 +1,7 @@
 from fractions import Fraction
 
 global solved
+global color
 
 def findSlopeFromPointEquation():
     global slope
@@ -87,29 +88,22 @@ def pairSort(pair="0,0", programNumber=0, pair1="0,0"):
     global x1
     global y1
     global pairSuccess
-    try:
-        pairReplace = pair.replace("(", "")
-        pairReplace = pairReplace.replace(")", "")
-        pairReplace = pairReplace.replace(" ", "")
-        x, y = pairReplace.split(",")
-        x = float(x)
-        y = float(y)
 
-        pairReplace = pair1.replace("(", "")
-        pairReplace = pairReplace.replace(")", "")
-        pairReplace = pairReplace.replace(" ", "")
-        x1, y1 = pairReplace.split(",")
-        x1 = float(x1)
-        y1 = float(y1)
-        pairSuccess = True
+    pairReplace = pair.replace("(", "")
+    pairReplace = pairReplace.replace(")", "")
+    pairReplace = pairReplace.replace(" ", "")
+    x, y = pairReplace.split(",")
+    x = float(x)
+    y = float(y)
 
-    except:
-        print("Please type in valid ordered pairs like (2,8) or -4,0")
-        if programNumber == 1:
-            pointSlopeToSlopeIntercept()
-        if programNumber == 2:
-            findSlopeFromPoint()
-        pairSuccess = False
+    pairReplace = pair1.replace("(", "")
+    pairReplace = pairReplace.replace(")", "")
+    pairReplace = pairReplace.replace(" ", "")
+    x1, y1 = pairReplace.split(",")
+    x1 = float(x1)
+    y1 = float(y1)
+    pairSuccess = True
+
 
 
 def slopeFind(rize="0", run="1"):
@@ -193,34 +187,46 @@ def pointSlopeToSlopeIntercept(pair, slopein):
     # used so the calculations aren't repeated
     global pairSuccess
     global success
+    global solved
+    global color
+    color ="grey"
     success = False
     pairSuccess = False
+    try:
+        pairSort(pair,1)
+    except:
+        color = "red"
+        solved = "Please type in a\n valid ordered pair"
+        return
+    try:
+        slope = Fraction(slopein).limit_denominator()
+        slope = slope.numerator/slope.denominator
+    except:
+        color = "red"
+        solved = "Please type in a\n valid slope"
 
-    pairSort(pair,1)
+        return
 
-    if pairSuccess:
-        try:
-            slope = Fraction(slopein).limit_denominator()
-            slope = slope.numerator/slope.denominator
-            success = True
-        except:
-            pass
-    if pairSuccess and success:
-        yIntercept = (-x * slope) + y
-        pointSlopeEquation(slope, yIntercept)
 
-    pairSuccess = True
+    yIntercept = (-x * slope) + y
+    pointSlopeEquation(slope, yIntercept)
 
 def findSlopeFromPoint(point,point1):
     global pairSuccess
     global solved
+    global color
+    color = "grey"
     pairSuccess = False
-    pairSort(point, 2, point1,)
+    try:
+        pairSort(point, 2, point1,)
+    except:
+        color = "red"
+        solved = "Please type in\n valid ordered pairs"
+        return
 
-    if pairSuccess:
-        findSlopeFromPointEquation()
-        yIntercept = (-x * slope) + y
-        pointSlopeEquation(slope, yIntercept)
+    findSlopeFromPointEquation()
+    yIntercept = (-x * slope) + y
+    pointSlopeEquation(slope, yIntercept)
 
 
 def transformation():
