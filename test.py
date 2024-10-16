@@ -1,3 +1,5 @@
+from tkinter import PhotoImage
+
 import customtkinter
 import GUImath
   # set initial value
@@ -59,7 +61,7 @@ class App(customtkinter.CTk):
         self.geometry("250x400")
         self.title("Starter Code Example")
         self.attributes('-topmost',True)
-        self.wm_iconbitmap("icon.ico")
+        self.iconbitmap("C:/Users/msmn/PycharmProjects/test/photos/icon.ico")
         self.resizable(False, False)
         combobox_var = customtkinter.StringVar(value="slope from two points")
         # Grid Configuration

@@ -223,8 +223,11 @@ def findSlopeFromPoint(point,point1):
         color = "red"
         solved = "Please type in\n valid ordered pairs"
         return
-
-    findSlopeFromPointEquation()
+    try:
+        findSlopeFromPointEquation()
+    except:
+        solved = "The slope is undefined"
+        return
     yIntercept = (-x * slope) + y
     pointSlopeEquation(slope, yIntercept)
 
