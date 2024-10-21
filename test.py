@@ -1,5 +1,5 @@
 from tkinter import PhotoImage
-# command for exe: pyinstaller --noconfirm --onefile --windowed --icon "C:\Users\msmn\PycharmProjects\test\photos\icon.ico" --add-data "C:\Users\msmn\PycharmProjects\test\GUImath.py;." --add-data "C:\Users\msmn\PycharmProjects\test\photos;photos/" --add-data "C:\Users\msmn\PycharmProjects\test\.venv\Lib\site-packages\customtkinter;customtkinter/"  "C:\Users\msmn\PycharmProjects\test\test.py"
+# command for exe: pyinstaller --noconfirm --windowed --icon "C:\Users\msmn\PycharmProjects\test\photos\icon.ico" --add-data "C:\Users\msmn\PycharmProjects\test\GUImath.py;." --add-data "C:\Users\msmn\PycharmProjects\test\photos;photos/" --add-data "C:\Users\msmn\PycharmProjects\test\.venv\Lib\site-packages\customtkinter;customtkinter/"  "C:\Users\msmn\PycharmProjects\test\test.py"
 import customtkinter
 import GUImath
 import os
