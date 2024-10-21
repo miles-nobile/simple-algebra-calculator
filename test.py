@@ -1,8 +1,11 @@
 from tkinter import PhotoImage
-
+# command for exe: pyinstaller --noconfirm --onefile --windowed --icon "C:\Users\msmn\PycharmProjects\test\photos\icon.ico" --add-data "C:\Users\msmn\PycharmProjects\test\GUImath.py;." --add-data "C:\Users\msmn\PycharmProjects\test\photos;photos/" --add-data "C:\Users\msmn\PycharmProjects\test\.venv\Lib\site-packages\customtkinter;customtkinter/"  "C:\Users\msmn\PycharmProjects\test\test.py"
 import customtkinter
 import GUImath
-  # set initial value
+import os
+basedir = os.path.dirname(__file__)
+
+
 test = 1
 
 #test
@@ -61,7 +64,7 @@ class App(customtkinter.CTk):
         self.geometry("250x400")
         self.title("Starter Code Example")
         self.attributes('-topmost',True)
-        self.iconbitmap("C:/Users/msmn/PycharmProjects/test/photos/icon.ico")
+        self.iconbitmap(os.path.join(basedir,"photos", "icon.ico"))
         self.resizable(False, False)
         combobox_var = customtkinter.StringVar(value="slope from two points")
         # Grid Configuration
