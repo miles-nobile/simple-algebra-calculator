@@ -3,6 +3,16 @@ from fractions import Fraction
 global solved
 global color
 
+
+def printNum(num):
+    num = float(num)
+    if num.is_integer():
+        return int(num)
+    else:
+        return Fraction(num)
+
+
+
 def findSlopeFromPointEquation():
     global slope
     global printSlope
@@ -16,10 +26,11 @@ def findSlopeFromPointEquation():
 
 
 def standardEquation(a, b, c):
+    global solved
     if b > 0:
-        print(f"{a}x +{b}y = {c}")
+        solved = f"{a}x +{b}y = {c}"
     elif b < 0:
-        print(f"{a}x {b}y = {c}")
+        solved =f"{a}x {b}y = {c}"
 
 
 def pointSlopeEquation(slope, yIntercept, equals="y"):
@@ -128,59 +139,57 @@ def transformationEquation(gOfx, fOfx):
     global slope
     global yIntercept
     global transformationSuccess
-    try:
-        gOfx = gOfx.replace(" ", "")
-        gOfx = gOfx.replace("(", "")
-        gOfx = gOfx.replace("x", "")
-        gOfx = gOfx.replace("f", "")
-        parenthesesIn, parenthesesOut = gOfx.split(")")
-        if parenthesesIn.__contains__("/"):
-            parenthesesIn = Fraction(parenthesesIn).numerator / Fraction(parenthesesIn).limit_denominator().denominator
-        if parenthesesOut.__contains__("/"):
-            parenthesesOut = Fraction(parenthesesOut).numerator / Fraction(
+
+    gOfx = gOfx.replace(" ", "")
+    gOfx = gOfx.replace("(", "")
+    gOfx = gOfx.replace("x", "")
+    gOfx = gOfx.replace("f", "")
+    parenthesesIn, parenthesesOut = gOfx.split(")")
+    if parenthesesIn.__contains__("/"):
+        parenthesesIn = Fraction(parenthesesIn).numerator / Fraction(parenthesesIn).limit_denominator().denominator
+    if parenthesesOut.__contains__("/"):
+        parenthesesOut = Fraction(parenthesesOut).numerator / Fraction(
                 parenthesesOut).limit_denominator().denominator
 
-        fOfx = fOfx.replace(" ", "")
-        slope, yIntercept = fOfx.split("x")
-        if slope == "":
-            slope = "1"
-        if slope.__contains__("/"):
-            slope = Fraction(slope).numerator / Fraction(slope).limit_denominator().denominator
+    fOfx = fOfx.replace(" ", "")
+    slope, yIntercept = fOfx.split("x")
+    if slope == "":
+        slope = "1"
+    if slope.__contains__("/"):
+        slope = Fraction(slope).numerator / Fraction(slope).limit_denominator().denominator
 
-        if yIntercept == "":
-            yIntercept = "0"
-        if yIntercept.__contains__("/"):
-            yIntercept = Fraction(yIntercept).numerator / Fraction(yIntercept).limit_denominator().denominator
+    if yIntercept == "":
+        yIntercept = "0"
+    if yIntercept.__contains__("/"):
+        yIntercept = Fraction(yIntercept).numerator / Fraction(yIntercept).limit_denominator().denominator
 
-        yIntercept = float(yIntercept)
-        slope = float(slope)
+    yIntercept = float(yIntercept)
+    slope = float(slope)
 
-        if parenthesesIn.startswith("+") or parenthesesIn.startswith("-"):
-            amount = float(parenthesesIn)
-            yIntercept = (slope * amount) + yIntercept
-            pointSlopeEquation(slope, yIntercept, "g(x)")
+    if parenthesesIn.startswith("+") or parenthesesIn.startswith("-"):
+        amount = float(parenthesesIn)
+        yIntercept = (slope * amount) + yIntercept
+        pointSlopeEquation(slope, yIntercept, "g(x)")
 
-        elif parenthesesOut.startswith("+") or parenthesesOut.startswith("-"):
-            amount = float(parenthesesOut)
-            yIntercept = amount + yIntercept
-            pointSlopeEquation(slope, yIntercept, "g(x)")
+    elif parenthesesOut.startswith("+") or parenthesesOut.startswith("-"):
+        amount = float(parenthesesOut)
+        yIntercept = amount + yIntercept
+        pointSlopeEquation(slope, yIntercept, "g(x)")
 
-        elif parenthesesIn.startswith("*"):
-            parenthesesIn = parenthesesIn.replace("*", "")
-            amount = float(parenthesesIn)
-            slope = slope * amount
-            pointSlopeEquation(slope, yIntercept, "g(x)")
+    elif parenthesesIn.startswith("*"):
+        parenthesesIn = parenthesesIn.replace("*", "")
+        amount = float(parenthesesIn)
+        slope = slope * amount
+        pointSlopeEquation(slope, yIntercept, "g(x)")
 
-        elif parenthesesOut.startswith("*"):
-            parenthesesOut = parenthesesOut.replace("*", "")
-            amount = float(parenthesesOut)
-            slope = slope * amount
-            yIntercept = yIntercept * amount
-            pointSlopeEquation(slope, yIntercept, "g(x)")
+    elif parenthesesOut.startswith("*"):
+        parenthesesOut = parenthesesOut.replace("*", "")
+        amount = float(parenthesesOut)
+        slope = slope * amount
+        yIntercept = yIntercept * amount
+        pointSlopeEquation(slope, yIntercept, "g(x)")
 
-        transformationSuccess = True
-    except:
-        print("test")
+
 
 
 def pointSlopeToSlopeIntercept(pair, slopein):
@@ -232,19 +241,20 @@ def findSlopeFromPoint(point,point1):
     pointSlopeEquation(slope, yIntercept)
 
 
-def transformation():
-    global transformationSuccess
-    transformationSuccess = False
+def transformation(fOfx,gOfx):
+    global color, solved
+    color = ("grey")
+    try:
+        transformationEquation(gOfx, fOfx)
+    except:
+        color = "red"
+        solved = f"Please type in valid\n slope intercept equations"
+        return
 
-    fOfx = input("f(x) = ")
-    gOfx = input("g(x) = ")
-    transformationEquation(gOfx, fOfx)
-    if transformationSuccess and input("Would you like to use x to y converter(yes/no): ") == "yes":
-        xToYConverter(2, slope, yIntercept)
 
-
-def standardToSlopeIntercept():
-    equation = input("Equation in standard form: ")
+def standardToSlopeIntercept(equation):
+    global color, solved
+    color = "grey"
     try:
         equation = equation.replace(" ", "")
         equation = equation.replace("y", "")
@@ -259,12 +269,14 @@ def standardToSlopeIntercept():
         pointSlopeEquation(slope, yIntercept)
 
     except:
-        print("please type a valid standard form equation like 2x + 3y = 12")
-        standardToSlopeIntercept()
+        color = "red"
+        solved = f"Please type in a\n valid standard equation"
+        return
 
 
-def slopeInterceptToStandard():
-    equation = input("y = ")
+def slopeInterceptToStandard(equation):
+    global color, solved
+    color = "grey"
     try:
         equation = equation.replace(" ", "")
         x, yIntercept = equation.split("x")
@@ -298,6 +310,29 @@ def slopeInterceptToStandard():
         standardEquation(x, y, yIntercept)
 
     except:
-        print("please type a valid slope intercept form equation like y = 3x +2")
-        slopeInterceptToStandard()
+        color = "red"
+        solved = f"Please type in a valid\n slope intercept equation"
+        return
+
+
+def interceptFind(fOfx):
+    global color, solved
+    color = "grey"
+    y = ""
+    try:
+        fOfx = fOfx.lower()
+        fOfx = fOfx.replace(" ","")
+        fOfx = fOfx.replace("f(x)=","")
+        x, y = fOfx.split("x")
+
+        if y == "": y = 0.0
+        else:
+            y = Fraction(y).numerator/Fraction(y).limit_denominator().denominator
+        x = Fraction(x).numerator / Fraction(x).limit_denominator().denominator
+    except:
+        color = "red"
+        solved = f"Please type in a valid\n slope intercept equation"
+        return
+
+    solved = f"y intercept: {printNum(y)}\nx intercept: {printNum(y/-x)}"
 

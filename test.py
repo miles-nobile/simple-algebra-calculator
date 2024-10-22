@@ -1,5 +1,4 @@
-from tkinter import PhotoImage
-# command for exe: pyinstaller --noconfirm --windowed --icon "photos\icon.ico" --add-data "GUImath.py;." --add-data "photos;photos/" --add-data "customtkinter;customtkinter/"  "test.py"
+# command for exe: pyinstaller --noconfirm --windowed --icon "photos\icon.ico" --add-data "GUImath.py;." --add-data "photos;photos/" "test.py"
 import customtkinter
 import GUImath
 import os
@@ -31,6 +30,30 @@ class App(customtkinter.CTk):
                 else:
                     GUImath.pointSlopeToSlopeIntercept(box1.get(), box2.get())
                     answer.configure(text=GUImath.solved,text_color=GUImath.color)
+            elif combobox.get() == "transformation":
+                if box1.get() ==""  or box2.get()  == "":
+                    answer.configure(text="Both boxes must be filled in",text_color="red")
+                else:
+                    GUImath.transformation(box1.get(), box2.get())
+                    answer.configure(text=GUImath.solved,text_color=GUImath.color)
+            elif combobox.get() == "find intercept":
+                if box1.get() =="":
+                    answer.configure(text="Box must be filled in",text_color="red")
+                else:
+                    GUImath.interceptFind(box1.get())
+                    answer.configure(text=GUImath.solved,text_color=GUImath.color)
+            elif combobox.get() == "standard to slope intercept":
+                if box1.get() =="":
+                    answer.configure(text="Box must be filled in",text_color="red")
+                else:
+                    GUImath.standardToSlopeIntercept(box1.get())
+                    answer.configure(text=GUImath.solved,text_color=GUImath.color)
+            elif combobox.get() == "slope intercept to standard":
+                if box1.get() =="":
+                    answer.configure(text="Box must be filled in",text_color="red")
+                else:
+                    GUImath.slopeInterceptToStandard(box1.get())
+                    answer.configure(text=GUImath.solved,text_color=GUImath.color)
         def combobox_callback(choice):
             answer.configure(text="")
             box1.delete(0,100000)
@@ -53,6 +76,36 @@ class App(customtkinter.CTk):
                 box1.configure(placeholder_text="1,2")
                 label2.configure(text="Slope")
                 box2.configure(placeholder_text="1/3")
+            elif choice == "transformation":
+                label1.grid(row=2, column=0)
+                box1.grid(row=3, column=0, pady=5)
+                label2.grid(row=4, column=0)
+                box2.grid(row=5, column=0, pady=5)
+                label1.configure(text="f(x)")
+                box1.configure(placeholder_text="2x +1")
+                label2.configure(text="g(x)")
+                box2.configure(placeholder_text="f(x)+2")
+            elif choice == "find intercept":
+                label1.grid(row=2, column=0)
+                box1.grid(row=3, column=0, pady=5)
+                label2.grid_remove()
+                box2.grid_remove()
+                label1.configure(text="f(x)")
+                box1.configure(placeholder_text="2x +1")
+            elif choice == "standard to slope intercept":
+                label1.grid(row=2, column=0)
+                box1.grid(row=3, column=0, pady=5)
+                label2.grid_remove()
+                box2.grid_remove()
+                label1.configure(text="Standard Equation")
+                box1.configure(placeholder_text="1x 2y = 3")
+            elif choice == "slope intercept to standard":
+                label1.grid(row=2, column=0)
+                box1.grid(row=3, column=0, pady=5)
+                label2.grid_remove()
+                box2.grid_remove()
+                label1.configure(text="Slope Intercept Equation")
+                box1.configure(placeholder_text="1x +2")
 
             else:
                 label1.grid_remove()
@@ -86,7 +139,7 @@ class App(customtkinter.CTk):
                                        anchor="center")
         combobox = customtkinter.CTkComboBox(master=self,
                                              width=140,
-                                             values=["slope from two points", "point slope to slope intercept"],
+                                             values=["slope from two points", "point slope to slope intercept","transformation","find intercept","standard to slope intercept","slope intercept to standard"],
                                              command=combobox_callback,
                                              variable=combobox_var
                                              )
@@ -108,7 +161,7 @@ class App(customtkinter.CTk):
 
         box2 = customtkinter.CTkEntry(self, placeholder_text="-4,0")
 
-        runButton = customtkinter.CTkButton(self, text="Run",command=run )
+        runButton = customtkinter.CTkButton(self, text="Run", command=run)
 
         answer = customtkinter.CTkLabel(self,
                                         text="",
