@@ -58,6 +58,8 @@ class App(customtkinter.CTk):
             answer.configure(text="")
             box1.delete(0,100000)
             box2.delete(0,100000)
+            box1.master.focus()
+            box2.master.focus()
             if choice == "slope from two points":
                 label1.grid(row=2, column=0)
                 box1.grid(row=3, column=0, pady=5)
