@@ -56,8 +56,8 @@ class App(customtkinter.CTk):
                     answer.configure(text=GUImath.solved,text_color=GUImath.color)
         def combobox_callback(choice):
             answer.configure(text="")
-            box1.delete(0,100000)
-            box2.delete(0,100000)
+            box1.delete(0,"end")
+            box2.delete(0,"end")
             box1.master.focus()
             box2.master.focus()
             if choice == "slope from two points":
