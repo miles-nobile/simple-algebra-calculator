@@ -1,16 +1,24 @@
 x = -1
-test = "2+2+2"
+test = "2(+2)+2"
 test = test.replace(" ","")
 test = test.replace("+","s+")
 test = test.replace("-","s-")
 test = test.replace("*","a*")
 test = test.replace("/","a/")
-
+test = test.replace("(","a*(")
+test = test.replace(")","p)a*")
+test = test.replace("+a*","+")
+test = test.replace("-a*","-")
+test = test.replace("a*s+","s+")
+test = test.replace("a*s-","s-")
+test = test.replace("/a*","/")
+test = test.replace("a*a/","a/")
+test = test.replace("*a*","a*")
+print(test)
 test1 = test.split("(")
 test2 = []
 y = -1
 for test3 in test1:
-    y = y + 1
     test2.extend(test3.split(")"))
 
 print(test2)
