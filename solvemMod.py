@@ -41,7 +41,6 @@ def emdas(equation):
             id.insert(x, solve)
         else:
             id.insert(x, part)
-    print(id)
     answer = 0
     for part in id:
         if part == "": part = "0"
@@ -92,7 +91,6 @@ def pemdas(equation):
     equation = equation.replace("/a*", "/")
     equation = equation.replace("*a/", "/")
     equation = equation.replace("a*a*", "a*")
-    print(equation)
     parentheses = equation.split("(")
     for part in parentheses:
         solves = ""
@@ -106,12 +104,7 @@ def pemdas(equation):
             else:
                 solves = solves + piece
         half = half + solves
-        print(half)
 
+    return str(emdas(half))
 
-
-
-
-    return emdas(half)
-
-print(pemdas("1/2^"))
+print(pemdas(input("Equation:\n")))
