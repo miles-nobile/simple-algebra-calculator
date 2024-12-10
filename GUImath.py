@@ -9,7 +9,7 @@ def printNum(num):
     if num.is_integer():
         return int(num)
     else:
-        return Fraction(num)
+        return Fraction(num).limit_denominator()
 
 
 
