@@ -10,12 +10,33 @@ def emdas(equation):
             part = part.split("a")
             for piece in part:
                 if not piece.__contains__("*") and not piece.__contains__("/"):
+                    if piece.__contains__("^"):
+                        try:
+                            part2, part1 = piece.split("^")
+                        except:
+                            part1 = "2"
+                        if part1 == "": part1 = "2"
+                        piece = float(part2) ** float(part1)
                     solve = float(piece)
                 elif piece.__contains__("*"):
                     piece = piece.replace("*", "")
+                    if piece.__contains__("^"):
+                        try:
+                            part2, part1 = piece.split("^")
+                        except:
+                            part1 = "2"
+                        if part1 == "": part1 = "2"
+                        piece = float(part2) ** float(part1)
                     solve = solve * float(piece)
                 elif piece.__contains__("/"):
                     piece = piece.replace("/", "")
+                    if piece.__contains__("^"):
+                        try:
+                            part2, part1 = piece.split("^")
+                        except:
+                            part1 = "2"
+                        if part1 == "": part1 = "2"
+                        piece = float(part2) ** float(part1)
                     solve = solve / float(piece)
             id.insert(x, solve)
         else:
@@ -24,6 +45,13 @@ def emdas(equation):
     answer = 0
     for part in id:
         if part == "": part = "0"
+        if str(part).__contains__("^"):
+            try:
+                part2, part1 = part.split("^")
+            except:
+                part1 = "2"
+            if part1 == "": part1 = "2"
+            part = float(part2) ** float(part1)
         answer = answer + float(part)
     return answer
 
@@ -86,4 +114,4 @@ def pemdas(equation):
 
     return emdas(half)
 
-print(pemdas("1+2(3-4)/5"))
+print(pemdas("1/2^"))
