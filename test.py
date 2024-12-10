@@ -51,8 +51,11 @@ class App(customtkinter.CTk):
             elif combobox.get() == "slope intercept to standard":
                 if box1.get() =="":
                     answer.configure(text="Box must be filled in",text_color="red")
+            elif combobox.get() == "pemdas":
+                if box1.get() =="":
+                    answer.configure(text="Box must be filled in",text_color="red")
                 else:
-                    GUImath.slopeInterceptToStandard(box1.get())
+                    GUImath.pemdas(box1.get())
                     answer.configure(text=GUImath.solved,text_color=GUImath.color)
         def combobox_callback(choice):
             answer.configure(text="")
@@ -94,6 +97,13 @@ class App(customtkinter.CTk):
                 box2.grid_remove()
                 label1.configure(text="f(x)")
                 box1.configure(placeholder_text="2x +1")
+            elif choice == "pemdas":
+                label1.grid(row=2, column=0)
+                box1.grid(row=3, column=0, pady=5)
+                label2.grid_remove()
+                box2.grid_remove()
+                label1.configure(text="Pemdas Eqaution")
+                box1.configure(placeholder_text="1+2(3*4)^5")
             elif choice == "standard to slope intercept":
                 label1.grid(row=2, column=0)
                 box1.grid(row=3, column=0, pady=5)
@@ -141,7 +151,7 @@ class App(customtkinter.CTk):
                                        anchor="center")
         combobox = customtkinter.CTkComboBox(master=self,
                                              width=140,
-                                             values=["slope from two points", "point slope to slope intercept","transformation","find intercept","standard to slope intercept","slope intercept to standard"],
+                                             values=["slope from two points", "point slope to slope intercept","transformation","find intercept","standard to slope intercept","slope intercept to standard","pemdas"],
                                              command=combobox_callback,
                                              variable=combobox_var
                                              )

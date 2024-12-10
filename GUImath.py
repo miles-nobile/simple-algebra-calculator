@@ -393,53 +393,58 @@ def emdas(equation):
 
 
 def pemdas(equation):
-    half = ""
-    x = -1
-    equation = equation.replace(" ", "")
-    equation = equation.replace("+", "s+")
-    equation = equation.replace("-", "s-")
-    equation = equation.replace("*", "a*")
-    equation = equation.replace("/", "a/")
-    equation = equation.replace("0(", "0a*(")
-    equation = equation.replace("1(", "1a*(")
-    equation = equation.replace("2(", "2a*(")
-    equation = equation.replace("3(", "3a*(")
-    equation = equation.replace("4(", "4a*(")
-    equation = equation.replace("5(", "5a*(")
-    equation = equation.replace("6(", "6a*(")
-    equation = equation.replace("7(", "7a*(")
-    equation = equation.replace("8(", "8a*(")
-    equation = equation.replace("9(", "9a*(")
-    equation = equation.replace(")0", "p)a*0")
-    equation = equation.replace(")1", "p)a*1")
-    equation = equation.replace(")2", "p)a*2")
-    equation = equation.replace(")3", "p)a*3")
-    equation = equation.replace(")4", "p)a*4")
-    equation = equation.replace(")5", "p)a*5")
-    equation = equation.replace(")6", "p)a*6")
-    equation = equation.replace(")7", "p)a*7")
-    equation = equation.replace(")8", "p)a*8")
-    equation = equation.replace(")9", "p)a*9")
-    equation = equation.replace(")", "p)")
-    equation = equation.replace("+a*", "+")
-    equation = equation.replace("-a*", "-")
-    equation = equation.replace("a*s+", "s+")
-    equation = equation.replace("a*s-", "s-")
-    equation = equation.replace("/a*", "/")
-    equation = equation.replace("*a/", "/")
-    equation = equation.replace("a*a*", "a*")
-    parentheses = equation.split("(")
-    for part in parentheses:
-        solves = ""
-        part =  part.split(")")
-        x = x + 1
-        for piece in part:
+    global color, solved
+    try:
+        half = ""
+        x = -1
+        equation = equation.replace(" ", "")
+        equation = equation.replace("+", "s+")
+        equation = equation.replace("-", "s-")
+        equation = equation.replace("*", "a*")
+        equation = equation.replace("/", "a/")
+        equation = equation.replace("0(", "0a*(")
+        equation = equation.replace("1(", "1a*(")
+        equation = equation.replace("2(", "2a*(")
+        equation = equation.replace("3(", "3a*(")
+        equation = equation.replace("4(", "4a*(")
+        equation = equation.replace("5(", "5a*(")
+        equation = equation.replace("6(", "6a*(")
+        equation = equation.replace("7(", "7a*(")
+        equation = equation.replace("8(", "8a*(")
+        equation = equation.replace("9(", "9a*(")
+        equation = equation.replace(")0", "p)a*0")
+        equation = equation.replace(")1", "p)a*1")
+        equation = equation.replace(")2", "p)a*2")
+        equation = equation.replace(")3", "p)a*3")
+        equation = equation.replace(")4", "p)a*4")
+        equation = equation.replace(")5", "p)a*5")
+        equation = equation.replace(")6", "p)a*6")
+        equation = equation.replace(")7", "p)a*7")
+        equation = equation.replace(")8", "p)a*8")
+        equation = equation.replace(")9", "p)a*9")
+        equation = equation.replace(")", "p)")
+        equation = equation.replace("+a*", "+")
+        equation = equation.replace("-a*", "-")
+        equation = equation.replace("a*s+", "s+")
+        equation = equation.replace("a*s-", "s-")
+        equation = equation.replace("/a*", "/")
+        equation = equation.replace("*a/", "/")
+        equation = equation.replace("a*a*", "a*")
+        parentheses = equation.split("(")
+        for part in parentheses:
+            solves = ""
+            part =  part.split(")")
+            x = x + 1
+            for piece in part:
 
-            if piece.__contains__("p"):
-                piece = piece.replace("p", "")
-                solves = solves + str(emdas(piece))
-            else:
-                solves = solves + piece
-        half = half + solves
-
-    return str(emdas(half))
+                if piece.__contains__("p"):
+                    piece = piece.replace("p", "")
+                    solves = solves + str(emdas(piece))
+                else:
+                    solves = solves + piece
+            half = half + solves
+        color ="grey"
+        solved = str(emdas(half))
+    except:
+        color ="red"
+        solved = "Please type in a valid\n pemdas equation"
