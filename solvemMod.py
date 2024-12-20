@@ -1,4 +1,3 @@
-from unittest.mock import right
 
 
 def hasNum(string):
@@ -143,8 +142,10 @@ def sloveX(equation):
 
     leftX = float(leftX) - float(rightX)
     right = float(right) - float(left)
-    equation = str(leftX) + "=" + str(right)
-    return equation
+
+    answer = right/leftX
+
+    return f"x = {answer}"
 
 
-print(sloveX("5=1+x"))
+print(sloveX("2+5=1+x"))
