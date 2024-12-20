@@ -190,8 +190,6 @@ def transformationEquation(gOfx, fOfx):
         pointSlopeEquation(slope, yIntercept, "g(x)")
 
 
-
-
 def pointSlopeToSlopeIntercept(pair, slopein):
     # used so the calculations aren't repeated
     global pairSuccess
@@ -219,6 +217,7 @@ def pointSlopeToSlopeIntercept(pair, slopein):
 
     yIntercept = (-x * slope) + y
     pointSlopeEquation(slope, yIntercept)
+
 
 def findSlopeFromPoint(point,point1):
     global pairSuccess

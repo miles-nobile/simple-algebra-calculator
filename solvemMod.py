@@ -1,7 +1,17 @@
+from unittest.mock import right
+
+
+def hasNum(string):
+    for part in string[:]:
+        part = str(part)
+        if part.isdigit(): return True
+
+    return False
 
 
 def emdas(equation):
     id = []
+    rightX = []
     symple = equation.split("s")
     x = -1
     for part in symple:
@@ -40,8 +50,26 @@ def emdas(equation):
                     solve = solve / float(piece)
             id.insert(x, solve)
         else:
-            id.insert(x, part)
-    answer = 0
+            if part.__contains__("x"):
+                rightX.insert(x, part)
+            else:
+                id.insert(x, part)
+    numSolve = 0
+    xSolve = 0
+
+    for part in rightX:
+        part = part.replace("x","")
+        if not hasNum(part):
+            part = part + "1"
+        if str(part).__contains__("^"):
+            try:
+                part2, part1 = part.split("^")
+            except:
+                part1 = "2"
+            if part1 == "": part1 = "2"
+            part = float(part2) ** float(part1)
+        xSolve = xSolve + float(part)
+
     for part in id:
         if part == "": part = "0"
         if str(part).__contains__("^"):
@@ -51,8 +79,8 @@ def emdas(equation):
                 part1 = "2"
             if part1 == "": part1 = "2"
             part = float(part2) ** float(part1)
-        answer = answer + float(part)
-    return answer
+        numSolve = numSolve + float(part)
+    return numSolve,xSolve
 
 
 def pemdas(equation):
@@ -105,6 +133,18 @@ def pemdas(equation):
                 solves = solves + piece
         half = half + solves
 
-    return str(emdas(half))
+    return emdas(half)
 
-print(pemdas(input("Equation:\n")))
+def sloveX(equation):
+    left,right = equation.split("=")
+
+    left, leftX = pemdas(left)
+    right, rightX = pemdas(right)
+
+    leftX = float(leftX) - float(rightX)
+    right = float(right) - float(left)
+    equation = str(leftX) + "=" + str(right)
+    return equation
+
+
+print(sloveX("5=1+x"))
