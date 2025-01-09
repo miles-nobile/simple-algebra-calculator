@@ -9,6 +9,7 @@ def hasNum(string):
 
 
 def emdas(equation):
+    global xDivide
     id = []
     rightX = []
     symple = equation.split("s")
@@ -17,37 +18,83 @@ def emdas(equation):
         x = x + 1
         if part.__contains__("a"):
             part = part.split("a")
+            solve = ""
             for piece in part:
-                if not piece.__contains__("*") and not piece.__contains__("/"):
-                    if piece.__contains__("^"):
-                        try:
-                            part2, part1 = piece.split("^")
-                        except:
-                            part1 = "2"
-                        if part1 == "": part1 = "2"
-                        piece = float(part2) ** float(part1)
-                    solve = float(piece)
-                elif piece.__contains__("*"):
-                    piece = piece.replace("*", "")
-                    if piece.__contains__("^"):
-                        try:
-                            part2, part1 = piece.split("^")
-                        except:
-                            part1 = "2"
-                        if part1 == "": part1 = "2"
-                        piece = float(part2) ** float(part1)
-                    solve = solve * float(piece)
-                elif piece.__contains__("/"):
-                    piece = piece.replace("/", "")
-                    if piece.__contains__("^"):
-                        try:
-                            part2, part1 = piece.split("^")
-                        except:
-                            part1 = "2"
-                        if part1 == "": part1 = "2"
-                        piece = float(part2) ** float(part1)
-                    solve = solve / float(piece)
-            id.insert(x, solve)
+                if piece.__contains__("x") and not hasNum(piece): piece = piece.replace("x","1x")
+                if piece.__contains__("x") is not solve.__contains__("x"):
+                    if not piece.__contains__("*") and not piece.__contains__("/"):
+                        if piece.__contains__("^"):
+                            try:
+                                part2, part1 = piece.split("^")
+                            except:
+                                part1 = "2"
+                            if part1 == "": part1 = "2"
+                            piece = float(part2) ** float(part1)
+                        solve = str(float(piece))
+                    elif piece.__contains__("*"):
+                        piece = piece.replace("*", "")
+                        if piece.__contains__("^"):
+                            try:
+                                part2, part1 = piece.split("^")
+                            except:
+                                part1 = "2"
+                            if part1 == "": part1 = "2"
+                            piece = float(part2) ** float(part1)
+                        piece = piece.replace("x", "")
+                        solve = solve.replace("x", "")
+                        solve = f"{float(solve) * float(piece)}x"
+                    elif piece.__contains__("/"):
+                        piece = piece.replace("/", "")
+                        if piece.__contains__("^"):
+                            try:
+                                part2, part1 = piece.split("^")
+                            except:
+                                part1 = "2"
+                            if part1 == "": part1 = "2"
+                            piece = float(part2) ** float(part1)
+                        if solve.__contains__("x"):
+                            solve = solve.replace("x","")
+                            solve = f"{float(solve) / float(piece)}x"
+                        else:
+                            piece = piece.replace("x","")
+                            xDivide = True
+                            solve = f"{float(solve) / float(piece) }x"
+
+                else:
+                    if not piece.__contains__("*") and not piece.__contains__("/"):
+                        if piece.__contains__("^"):
+                            try:
+                                part2, part1 = piece.split("^")
+                            except:
+                                part1 = "2"
+                            if part1 == "": part1 = "2"
+                            piece = float(part2) ** float(part1)
+                        solve = str(float(piece))
+                    elif piece.__contains__("*"):
+                        piece = piece.replace("*", "")
+                        if piece.__contains__("^"):
+                            try:
+                                part2, part1 = piece.split("^")
+                            except:
+                                part1 = "2"
+                            if part1 == "": part1 = "2"
+                            piece = float(part2) ** float(part1)
+                        solve = solve * float(piece)
+                    elif piece.__contains__("/"):
+                        piece = piece.replace("/", "")
+                        if piece.__contains__("^"):
+                            try:
+                                part2, part1 = piece.split("^")
+                            except:
+                                part1 = "2"
+                            if part1 == "": part1 = "2"
+                            piece = float(part2) ** float(part1)
+                        solve = solve / float(piece)
+            if solve.__contains__("x"):
+                rightX.insert(x, solve)
+            else:
+                id.insert(x, solve)
+
         else:
             if part.__contains__("x"):
                 rightX.insert(x, part)
@@ -135,6 +182,8 @@ def pemdas(equation):
     return emdas(half)
 
 def sloveX(equation):
+    global xDivide
+    xDivide = False
     left,right = equation.split("=")
 
     left, leftX = pemdas(left)
@@ -143,9 +192,14 @@ def sloveX(equation):
     leftX = float(leftX) - float(rightX)
     right = float(right) - float(left)
 
-    answer = right/leftX
+    if not xDivide:
+        answer = right/leftX
+
+    else:
+        answer =  leftX/right
 
     return f"x = {answer}"
 
 
-print(sloveX("2+5=1+x"))
+print(sloveX("5=2/x*2"))
+
