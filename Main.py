@@ -7,7 +7,7 @@ basedir = os.path.dirname(__file__)
 
 test = 1
 
-#test
+
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
