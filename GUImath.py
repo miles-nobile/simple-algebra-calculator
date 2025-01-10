@@ -1,7 +1,6 @@
 from fractions import Fraction
 
-global solved
-global color
+global solved, color
 
 
 def print_num(num):
