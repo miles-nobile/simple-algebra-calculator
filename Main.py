@@ -22,13 +22,13 @@ class App(customtkinter.CTk):
                 if box1.get() ==""  or box2.get()  == "":
                     answer.configure(text="Both boxes must be filled in",text_color="red")
                 else:
-                    GUImath.findSlopeFromPoint(box1.get(), box2.get())
+                    GUImath.find_slope_from_point(box1.get(), box2.get())
                     answer.configure(text=GUImath.solved,text_color=GUImath.color)
             elif combobox.get() == "point slope to slope intercept":
                 if box1.get() ==""  or box2.get()  == "":
                     answer.configure(text="Both boxes must be filled in",text_color="red")
                 else:
-                    GUImath.pointSlopeToSlopeIntercept(box1.get(), box2.get())
+                    GUImath.point_slope_to_slope_intercept(box1.get(), box2.get())
                     answer.configure(text=GUImath.solved,text_color=GUImath.color)
             elif combobox.get() == "transformation":
                 if box1.get() ==""  or box2.get()  == "":
@@ -40,13 +40,13 @@ class App(customtkinter.CTk):
                 if box1.get() =="":
                     answer.configure(text="Box must be filled in",text_color="red")
                 else:
-                    GUImath.interceptFind(box1.get())
+                    GUImath.intercept_find(box1.get())
                     answer.configure(text=GUImath.solved,text_color=GUImath.color)
             elif combobox.get() == "standard to slope intercept":
                 if box1.get() =="":
                     answer.configure(text="Box must be filled in",text_color="red")
                 else:
-                    GUImath.standardToSlopeIntercept(box1.get())
+                    GUImath.standard_to_slope_intercept(box1.get())
                     answer.configure(text=GUImath.solved,text_color=GUImath.color)
             elif combobox.get() == "slope intercept to standard":
                 if box1.get() =="":

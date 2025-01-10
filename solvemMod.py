@@ -1,6 +1,6 @@
 
 
-def hasNum(string):
+def has_num(string):
     for part in string[:]:
         part = str(part)
         if part.isdigit(): return True
@@ -8,7 +8,7 @@ def hasNum(string):
     return False
 
 
-def emdas(equation):
+def x_emdas(equation):
     global xDivide
     id = []
     rightX = []
@@ -20,7 +20,7 @@ def emdas(equation):
             part = part.split("a")
             solve = ""
             for piece in part:
-                if piece.__contains__("x") and not hasNum(piece): piece = piece.replace("x","1x")
+                if piece.__contains__("x") and not has_num(piece): piece = piece.replace("x", "1x")
                 if piece.__contains__("x") is not solve.__contains__("x"):
                     if not piece.__contains__("*") and not piece.__contains__("/"):
                         if piece.__contains__("^"):
@@ -105,7 +105,7 @@ def emdas(equation):
 
     for part in rightX:
         part = part.replace("x","")
-        if not hasNum(part):
+        if not has_num(part):
             part = part + "1"
         if str(part).__contains__("^"):
             try:
@@ -129,7 +129,7 @@ def emdas(equation):
     return numSolve,xSolve
 
 
-def pemdas(equation):
+def x_pemdas(equation):
     half = ""
     x = -1
     equation = equation.replace(" ", "")
@@ -174,20 +174,21 @@ def pemdas(equation):
 
             if piece.__contains__("p"):
                 piece = piece.replace("p", "")
-                solves = solves + str(emdas(piece))
+                solves = solves + str(x_emdas(piece))
             else:
                 solves = solves + piece
         half = half + solves
 
-    return emdas(half)
+    return x_emdas(half)
 
-def sloveX(equation):
+
+def solve_x(equation):
     global xDivide
     xDivide = False
     left,right = equation.split("=")
 
-    left, leftX = pemdas(left)
-    right, rightX = pemdas(right)
+    left, leftX = x_pemdas(left)
+    right, rightX = x_pemdas(right)
 
     leftX = float(leftX) - float(rightX)
     right = float(right) - float(left)
@@ -201,5 +202,5 @@ def sloveX(equation):
     return f"x = {answer}"
 
 
-print(sloveX("5=2/x*2"))
+print(solve_x("5=2/x*2"))
 

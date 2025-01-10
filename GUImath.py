@@ -4,7 +4,7 @@ global solved
 global color
 
 
-def printNum(num):
+def print_num(num):
     num = float(num)
     if num.is_integer():
         return int(num)
@@ -12,8 +12,7 @@ def printNum(num):
         return Fraction(num).limit_denominator()
 
 
-
-def findSlopeFromPointEquation():
+def find_slope_from_point_equation():
     global slope
     global printSlope
     global rize
@@ -25,7 +24,7 @@ def findSlopeFromPointEquation():
         printSlope = Fraction(slope).limit_denominator()
 
 
-def standardEquation(a, b, c):
+def standard_equation(a, b, c):
     global solved
     if b > 0:
         solved = f"{a}x +{b}y = {c}"
@@ -33,7 +32,7 @@ def standardEquation(a, b, c):
         solved =f"{a}x {b}y = {c}"
 
 
-def pointSlopeEquation(slope, yIntercept, equals="y"):
+def point_slope_equation(slope, yIntercept, equals="y"):
     global solved
     if yIntercept > 0 and slope.is_integer() and yIntercept.is_integer():
         solved = f"{equals} = {int(slope)}x +{int(yIntercept)}"
@@ -53,7 +52,7 @@ def pointSlopeEquation(slope, yIntercept, equals="y"):
         solved = f"{equals} = {Fraction(slope).limit_denominator()}x {Fraction(yIntercept).limit_denominator()}"
 
 
-def xToYConverter(programNumber=1, slope1=0.0, yIntercept1=0.0, ):
+def x_to_y_converter(programNumber=1, slope1=0.0, yIntercept1=0.0, ):
     global fOfx
     run = True
     print("Type stop to exit\n")
@@ -93,7 +92,7 @@ def xToYConverter(programNumber=1, slope1=0.0, yIntercept1=0.0, ):
             print("test")
 
 
-def pairSort(pair="0,0", programNumber=0, pair1="0,0"):
+def pair_sort(pair="0,0", programNumber=0, pair1="0,0"):
     global x
     global y
     global x1
@@ -116,8 +115,7 @@ def pairSort(pair="0,0", programNumber=0, pair1="0,0"):
     pairSuccess = True
 
 
-
-def slopeFind(rize="0", run="1"):
+def slope_find(rize="0", run="1"):
     global slope
     global success
     try:
@@ -128,14 +126,14 @@ def slopeFind(rize="0", run="1"):
     except ZeroDivisionError:
         print("run can't be 0")
         success = False
-        pointSlopeToSlopeIntercept()
+        point_slope_to_slope_intercept()
     except:
         print("Please type in valid rize and run like rize = 2 and run = 1")
-        pointSlopeToSlopeIntercept()
+        point_slope_to_slope_intercept()
         success = False
 
 
-def transformationEquation(gOfx, fOfx):
+def transformation_equation(gOfx, fOfx):
     global slope
     global yIntercept
     global transformationSuccess
@@ -169,28 +167,28 @@ def transformationEquation(gOfx, fOfx):
     if parenthesesIn.startswith("+") or parenthesesIn.startswith("-"):
         amount = float(parenthesesIn)
         yIntercept = (slope * amount) + yIntercept
-        pointSlopeEquation(slope, yIntercept, "g(x)")
+        point_slope_equation(slope, yIntercept, "g(x)")
 
     elif parenthesesOut.startswith("+") or parenthesesOut.startswith("-"):
         amount = float(parenthesesOut)
         yIntercept = amount + yIntercept
-        pointSlopeEquation(slope, yIntercept, "g(x)")
+        point_slope_equation(slope, yIntercept, "g(x)")
 
     elif parenthesesIn.startswith("*"):
         parenthesesIn = parenthesesIn.replace("*", "")
         amount = float(parenthesesIn)
         slope = slope * amount
-        pointSlopeEquation(slope, yIntercept, "g(x)")
+        point_slope_equation(slope, yIntercept, "g(x)")
 
     elif parenthesesOut.startswith("*"):
         parenthesesOut = parenthesesOut.replace("*", "")
         amount = float(parenthesesOut)
         slope = slope * amount
         yIntercept = yIntercept * amount
-        pointSlopeEquation(slope, yIntercept, "g(x)")
+        point_slope_equation(slope, yIntercept, "g(x)")
 
 
-def pointSlopeToSlopeIntercept(pair, slopein):
+def point_slope_to_slope_intercept(pair, slope_in):
     # used so the calculations aren't repeated
     global pairSuccess
     global success
@@ -200,13 +198,13 @@ def pointSlopeToSlopeIntercept(pair, slopein):
     success = False
     pairSuccess = False
     try:
-        pairSort(pair,1)
+        pair_sort(pair, 1)
     except:
         color = "red"
         solved = "Please type in a\n valid ordered pair"
         return
     try:
-        slope = Fraction(slopein).limit_denominator()
+        slope = Fraction(slope_in).limit_denominator()
         slope = slope.numerator/slope.denominator
     except:
         color = "red"
@@ -216,42 +214,42 @@ def pointSlopeToSlopeIntercept(pair, slopein):
 
 
     yIntercept = (-x * slope) + y
-    pointSlopeEquation(slope, yIntercept)
+    point_slope_equation(slope, yIntercept)
 
 
-def findSlopeFromPoint(point,point1):
+def find_slope_from_point(point, point1):
     global pairSuccess
     global solved
     global color
     color = "grey"
     pairSuccess = False
     try:
-        pairSort(point, 2, point1,)
+        pair_sort(point, 2, point1, )
     except:
         color = "red"
         solved = "Please type in\n valid ordered pairs"
         return
     try:
-        findSlopeFromPointEquation()
+        find_slope_from_point_equation()
     except:
         solved = "The slope is undefined"
         return
     yIntercept = (-x * slope) + y
-    pointSlopeEquation(slope, yIntercept)
+    point_slope_equation(slope, yIntercept)
 
 
-def transformation(fOfx,gOfx):
+def transformation(f_ofx, g_ofx):
     global color, solved
     color = ("grey")
     try:
-        transformationEquation(gOfx, fOfx)
+        transformation_equation(g_ofx, f_ofx)
     except:
         color = "red"
         solved = f"Please type in valid\n slope intercept equations"
         return
 
 
-def standardToSlopeIntercept(equation):
+def standard_to_slope_intercept(equation):
     global color, solved
     color = "grey"
     try:
@@ -265,7 +263,7 @@ def standardToSlopeIntercept(equation):
         y = float(y)
         yIntercept = float(right) / y
         slope = -float(x) / y
-        pointSlopeEquation(slope, yIntercept)
+        point_slope_equation(slope, yIntercept)
 
     except:
         color = "red"
@@ -273,7 +271,7 @@ def standardToSlopeIntercept(equation):
         return
 
 
-def slopeInterceptToStandard(equation):
+def slope_intercept_to_standard(equation):
     global color, solved
     color = "grey"
     try:
@@ -306,7 +304,7 @@ def slopeInterceptToStandard(equation):
             x = -x
             y = -y
             yIntercept = -yIntercept
-        standardEquation(x, y, yIntercept)
+        standard_equation(x, y, yIntercept)
 
     except:
         color = "red"
@@ -314,15 +312,15 @@ def slopeInterceptToStandard(equation):
         return
 
 
-def interceptFind(fOfx):
+def intercept_find(f_ofx):
     global color, solved
     color = "grey"
     y = ""
     try:
-        fOfx = fOfx.lower()
-        fOfx = fOfx.replace(" ","")
-        fOfx = fOfx.replace("f(x)=","")
-        x, y = fOfx.split("x")
+        f_ofx = f_ofx.lower()
+        f_ofx = f_ofx.replace(" ", "")
+        f_ofx = f_ofx.replace("f(x)=", "")
+        x, y = f_ofx.split("x")
 
         if y == "": y = 0.0
         else:
@@ -333,7 +331,7 @@ def interceptFind(fOfx):
         solved = f"Please type in a valid\n slope intercept equation"
         return
 
-    solved = f"y intercept: {printNum(y)}\nx intercept: {printNum(y/-x)}"
+    solved = f"y intercept: {print_num(y)}\nx intercept: {print_num(y / -x)}"
 
 
 def emdas(equation):
