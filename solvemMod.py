@@ -22,15 +22,7 @@ def x_emdas(equation):
             for piece in part:
                 if piece.__contains__("x") and not has_num(piece): piece = piece.replace("x", "1x")
                 if piece.__contains__("x") is not solve.__contains__("x"):
-                    if not piece.__contains__("*") and not piece.__contains__("/"):
-                        if piece.__contains__("^"):
-                            try:
-                                part2, part1 = piece.split("^")
-                            except:
-                                part1 = "2"
-                            if part1 == "": part1 = "2"
-                            piece = float(part2) ** float(part1)
-                        solve = str(float(piece))
+                    if not piece.__contains__("*") and not piece.__contains__("/"): solve = str(piece)
                     elif piece.__contains__("*"):
                         piece = piece.replace("*", "")
                         if piece.__contains__("^"):

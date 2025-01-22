@@ -127,7 +127,7 @@ class App(customtkinter.CTk):
 
         # Window/App Customization
         self.geometry("250x400")
-        self.title("Starter Code Example")
+        self.title("Calculator")
         self.attributes('-topmost',True)
         self.iconbitmap(os.path.join(basedir,"photos", "icon.ico"))
         self.resizable(False, False)
