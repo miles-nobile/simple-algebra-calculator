@@ -21,7 +21,7 @@ def x_emdas(equation):
             solve = ""
             for piece in part:
                 if piece.__contains__("x") and not has_num(piece): piece = piece.replace("x", "1x")
-                if piece.__contains__("x") is not solve.__contains__("x"):
+                if piece.__contains__("x") is not str(solve).__contains__("x"):
                     if not piece.__contains__("*") and not piece.__contains__("/"): solve = str(piece)
                     elif piece.__contains__("*"):
                         piece = piece.replace("*", "")
@@ -61,7 +61,7 @@ def x_emdas(equation):
                                 part1 = "2"
                             if part1 == "": part1 = "2"
                             piece = float(part2) ** float(part1)
-                        solve = str(float(piece))
+                        solve = float(piece)
                     elif piece.__contains__("*"):
                         piece = piece.replace("*", "")
                         if piece.__contains__("^"):
@@ -82,7 +82,7 @@ def x_emdas(equation):
                             if part1 == "": part1 = "2"
                             piece = float(part2) ** float(part1)
                         solve = solve / float(piece)
-            if solve.__contains__("x"):
+            if str(solve).__contains__("x"):
                 rightX.insert(x, solve)
             else:
                 id.insert(x, solve)
@@ -139,6 +139,7 @@ def x_pemdas(equation):
     equation = equation.replace("7(", "7a*(")
     equation = equation.replace("8(", "8a*(")
     equation = equation.replace("9(", "9a*(")
+    equation = equation.replace("x(", "xa*(")
     equation = equation.replace(")0", "p)a*0")
     equation = equation.replace(")1", "p)a*1")
     equation = equation.replace(")2", "p)a*2")
@@ -149,6 +150,7 @@ def x_pemdas(equation):
     equation = equation.replace(")7", "p)a*7")
     equation = equation.replace(")8", "p)a*8")
     equation = equation.replace(")9", "p)a*9")
+    equation = equation.replace(")x", "p)a*x")
     equation = equation.replace(")", "p)")
     equation = equation.replace("+a*", "+")
     equation = equation.replace("-a*", "-")
@@ -160,17 +162,18 @@ def x_pemdas(equation):
     parentheses = equation.split("(")
     for part in parentheses:
         solves = ""
+        solvesX = ""
         part =  part.split(")")
         x = x + 1
         for piece in part:
 
             if piece.__contains__("p"):
                 piece = piece.replace("p", "")
-                solves = solves + str(x_emdas(piece))
+                notx, isx = x_emdas(piece)
+                solves = solves + str(notx)
             else:
                 solves = solves + piece
-        half = half + solves
-
+        half = half + solves 
     return x_emdas(half)
 
 
@@ -194,5 +197,5 @@ def solve_x(equation):
     return f"x = {answer}"
 
 
-print(solve_x("5=2/x*2"))
+print(solve_x("5=(x+2)"))
 
