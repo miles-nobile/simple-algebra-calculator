@@ -90,26 +90,34 @@ def pemdas(equation):
     equation = equation.replace("-", "s-")
     equation = equation.replace("*", "a*")
     equation = equation.replace("/", "a/")
-    equation = equation.replace("0(", "0a*(")
-    equation = equation.replace("1(", "1a*(")
-    equation = equation.replace("2(", "2a*(")
-    equation = equation.replace("3(", "3a*(")
-    equation = equation.replace("4(", "4a*(")
-    equation = equation.replace("5(", "5a*(")
-    equation = equation.replace("6(", "6a*(")
-    equation = equation.replace("7(", "7a*(")
-    equation = equation.replace("8(", "8a*(")
-    equation = equation.replace("9(", "9a*(")
-    equation = equation.replace(")0", ")a*0")
-    equation = equation.replace(")1", ")|1d")
-    equation = equation.replace(")2", ")a*2")
-    equation = equation.replace(")3", ")a*3")
-    equation = equation.replace(")4", ")a*4")
-    equation = equation.replace(")5", ")a*5")
-    equation = equation.replace(")6", ")a*6")
-    equation = equation.replace(")7", ")a*7")
-    equation = equation.replace(")8", ")a*8")
-    equation = equation.replace(")9", ")a*9")
+    equation = equation.replace("a*(", "d|(")
+    equation = equation.replace("a/(", "d/|(")
+    equation = equation.replace("s+(", "s+1d|(")
+    equation = equation.replace("s-(", "s-1d|(")
+    equation = equation.replace("0(", "0d|(")
+    equation = equation.replace("1(", "1d|(")
+    equation = equation.replace("2(", "2d|(")
+    equation = equation.replace("3(", "3d|(")
+    equation = equation.replace("4(", "4d|(")
+    equation = equation.replace("5(", "5d|(")
+    equation = equation.replace("6(", "6d|(")
+    equation = equation.replace("7(", "7d|(")
+    equation = equation.replace("8(", "8d|(")
+    equation = equation.replace("9(", "9d|(")
+    equation = equation.replace(")a*", ")|d")
+    equation = equation.replace(")a/", ")|d/")
+    equation = equation.replace(")s+", ")|d1s+")
+    equation = equation.replace(")s-", ")|d1s-")
+    equation = equation.replace(")0", ")|d0")
+    equation = equation.replace(")1", ")|d1")
+    equation = equation.replace(")2", ")|d2")
+    equation = equation.replace(")3", ")|d3")
+    equation = equation.replace(")4", ")|d4")
+    equation = equation.replace(")5", ")|d5")
+    equation = equation.replace(")6", ")|d6")
+    equation = equation.replace(")7", ")|d7")
+    equation = equation.replace(")8", ")|d8")
+    equation = equation.replace(")9", ")|d9")
     equation = equation.replace(")", "p)")
     equation = equation.replace("+a*", "+")
     equation = equation.replace("-a*", "-")
@@ -120,6 +128,7 @@ def pemdas(equation):
     equation = equation.replace("a*a*", "a*")
     distributelist = []
     testlist = []
+    equation = " " + equation + " "
     distribute = equation.split("|")
     equation =""
     for part in distribute:
@@ -127,13 +136,24 @@ def pemdas(equation):
         for piece in part:
             piece = piece.split("a")
             for number in piece:
+                if number.__contains__(" ("):
+                    distributelist.append(1.0)
                 if number.__contains__("d"):
                     numbers = number.replace("d","")
-                    distributelist.append(numbers)
+                    distributelist.append(float(numbers))
                 if not number.__contains__("d"):
                     equation = equation + number
+    length = len(distributelist)
+    step = 0
+    distributelist1 = []
+    while length >= 1:
+        distributelist1.append(distributelist[step] * distributelist[step + 1])
+        step = step +2
+        length = length - 2
+
     print(equation)
     print(distributelist)
+    print(distributelist1)
     parentheses = equation.split("(")
     for part in parentheses:
         solves = ""
@@ -164,4 +184,4 @@ def sloveX(equation):
     return f"x = {answer}"
 
 
-print(sloveX("5=(1)1+x"))
+print(sloveX("5=2(1)3+x"))
