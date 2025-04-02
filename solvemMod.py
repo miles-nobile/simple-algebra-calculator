@@ -138,6 +138,8 @@ def pemdas(equation):
             for number in piece:
                 if number.__contains__(" ("):
                     distributelist.append(1.0)
+                if number.__contains__(") "):
+                    distributelist.append(1.0)
                 if number.__contains__("d"):
                     numbers = number.replace("d","")
                     distributelist.append(float(numbers))
@@ -155,6 +157,7 @@ def pemdas(equation):
     print(distributelist)
     print(distributelist1)
     parentheses = equation.split("(")
+    timesrun = 0
     for part in parentheses:
         solves = ""
         part =  part.split(")")
@@ -163,7 +166,9 @@ def pemdas(equation):
 
             if piece.__contains__("p"):
                 piece = piece.replace("p", "")
-                solves = solves + str(emdas(piece))
+                parentheseslist = emdas(piece)
+                solves = solves + f"{float(parentheseslist[0]) * distributelist1[timesrun]}" + f"+{parentheseslist[1] * distributelist1[timesrun]}x"
+                timesrun = timesrun + 1
             else:
                 solves = solves + piece
         half = half + solves
