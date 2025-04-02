@@ -100,16 +100,16 @@ def pemdas(equation):
     equation = equation.replace("7(", "7a*(")
     equation = equation.replace("8(", "8a*(")
     equation = equation.replace("9(", "9a*(")
-    equation = equation.replace(")0", "p)a*0")
-    equation = equation.replace(")1", "p)|1d")
-    equation = equation.replace(")2", "p)a*2")
-    equation = equation.replace(")3", "p)a*3")
-    equation = equation.replace(")4", "p)a*4")
-    equation = equation.replace(")5", "p)a*5")
-    equation = equation.replace(")6", "p)a*6")
-    equation = equation.replace(")7", "p)a*7")
-    equation = equation.replace(")8", "p)a*8")
-    equation = equation.replace(")9", "p)a*9")
+    equation = equation.replace(")0", ")a*0")
+    equation = equation.replace(")1", ")|1d")
+    equation = equation.replace(")2", ")a*2")
+    equation = equation.replace(")3", ")a*3")
+    equation = equation.replace(")4", ")a*4")
+    equation = equation.replace(")5", ")a*5")
+    equation = equation.replace(")6", ")a*6")
+    equation = equation.replace(")7", ")a*7")
+    equation = equation.replace(")8", ")a*8")
+    equation = equation.replace(")9", ")a*9")
     equation = equation.replace(")", "p)")
     equation = equation.replace("+a*", "+")
     equation = equation.replace("-a*", "-")
@@ -121,6 +121,7 @@ def pemdas(equation):
     distributelist = []
     testlist = []
     distribute = equation.split("|")
+    equation =""
     for part in distribute:
         part = part.split("s")
         for piece in part:
@@ -130,8 +131,8 @@ def pemdas(equation):
                     numbers = number.replace("d","")
                     distributelist.append(numbers)
                 if not number.__contains__("d"):
-                    equation
-    print(str(testlist))
+                    equation = equation + number
+    print(equation)
     print(distributelist)
     parentheses = equation.split("(")
     for part in parentheses:
