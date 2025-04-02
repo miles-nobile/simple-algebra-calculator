@@ -92,7 +92,7 @@ def pemdas(equation):
     equation = equation.replace("*", "a*")
     equation = equation.replace("/", "a/")
     equation = equation.replace("a*(", "d|(")
-    equation = equation.replace("a/(", "d/|(")
+    equation = equation.replace("a/(", "a/1d|(")
     equation = equation.replace("s+(", "s+1d|(")
     equation = equation.replace("s-(", "s-1d|(")
     equation = equation.replace("0(", "0d|(")
@@ -106,7 +106,7 @@ def pemdas(equation):
     equation = equation.replace("8(", "8d|(")
     equation = equation.replace("9(", "9d|(")
     equation = equation.replace(")a*", ")|d")
-    equation = equation.replace(")a/", ")|d/")
+    equation = equation.replace(")a/", ")|d1a/")
     equation = equation.replace(")s+", ")|d1s+")
     equation = equation.replace(")s-", ")|d1s-")
     equation = equation.replace(")0", ")|d0")
@@ -154,15 +154,11 @@ def pemdas(equation):
         step = step +2
         length = length - 2
 
-    print(equation)
     equation = equation.replace(" ", "")
     equation = equation.replace("+", "s+")
     equation = equation.replace("-", "s-")
     equation = equation.replace("*", "a*")
     equation = equation.replace("/", "a/")
-    print(equation)
-    print(distributelist)
-    print(distributelist1)
     parentheses = equation.split("(")
     timesrun = 0
     for part in parentheses:
