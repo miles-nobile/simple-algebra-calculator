@@ -4,7 +4,6 @@ def hasNum(string):
     for part in string[:]:
         part = str(part)
         if part.isdigit(): return True
-
     return False
 
 
@@ -171,6 +170,7 @@ def pemdas(equation):
                 piece = piece.replace("p", "")
                 parentheseslist = emdas(piece)
                 solves = solves + f"{float(parentheseslist[0]) * distributelist1[timesrun]}" + f"s+{parentheseslist[1] * distributelist1[timesrun]}x"
+                solves =solves.replace("+-","-")
                 timesrun = timesrun + 1
             else:
                 solves = solves + piece
@@ -178,7 +178,8 @@ def pemdas(equation):
 
     return emdas(half)
 
-def sloveX(equation):
+
+def solvex(equation):
     left,right = equation.split("=")
 
     left, leftX = pemdas(left)
@@ -192,4 +193,4 @@ def sloveX(equation):
     return f"x = {answer}"
 
 
-print(sloveX("5=(1)+x"))
+print(solvex(input("equation:\n")))
