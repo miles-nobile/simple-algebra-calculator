@@ -7,7 +7,7 @@ def hasNum(string):
     return False
 
 
-def emdas(equation):
+def x_emdas(equation):
     id = []
     rightX = []
     symple = equation.split("s")
@@ -81,7 +81,7 @@ def emdas(equation):
     return numSolve,xSolve
 
 
-def pemdas(equation):
+def x_pemdas(equation):
     half = ""
     x = -1
 
@@ -168,7 +168,7 @@ def pemdas(equation):
 
             if piece.__contains__("p"):
                 piece = piece.replace("p", "")
-                parentheseslist = emdas(piece)
+                parentheseslist = x_emdas(piece)
                 solves = solves + f"{float(parentheseslist[0]) * distributelist1[timesrun]}" + f"s+{parentheseslist[1] * distributelist1[timesrun]}x"
                 solves =solves.replace("+-","-")
                 timesrun = timesrun + 1
@@ -176,14 +176,14 @@ def pemdas(equation):
                 solves = solves + piece
         half = half + solves
 
-    return emdas(half)
+    return x_emdas(half)
 
 
-def solvex(equation):
+def solve_x(equation):
     left,right = equation.split("=")
 
-    left, leftX = pemdas(left)
-    right, rightX = pemdas(right)
+    left, leftX = x_pemdas(left)
+    right, rightX = x_pemdas(right)
 
     leftX = float(leftX) - float(rightX)
     right = float(right) - float(left)
@@ -193,4 +193,4 @@ def solvex(equation):
     return f"x = {answer}"
 
 
-print(solvex(input("equation:\n")))
+print(solve_x(input("equation:\n")))
