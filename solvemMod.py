@@ -85,6 +85,7 @@ def emdas(equation):
 def pemdas(equation):
     half = ""
     x = -1
+
     equation = equation.replace(" ", "")
     equation = equation.replace("+", "s+")
     equation = equation.replace("-", "s-")
@@ -154,6 +155,12 @@ def pemdas(equation):
         length = length - 2
 
     print(equation)
+    equation = equation.replace(" ", "")
+    equation = equation.replace("+", "s+")
+    equation = equation.replace("-", "s-")
+    equation = equation.replace("*", "a*")
+    equation = equation.replace("/", "a/")
+    print(equation)
     print(distributelist)
     print(distributelist1)
     parentheses = equation.split("(")
@@ -167,7 +174,7 @@ def pemdas(equation):
             if piece.__contains__("p"):
                 piece = piece.replace("p", "")
                 parentheseslist = emdas(piece)
-                solves = solves + f"{float(parentheseslist[0]) * distributelist1[timesrun]}" + f"+{parentheseslist[1] * distributelist1[timesrun]}x"
+                solves = solves + f"{float(parentheseslist[0]) * distributelist1[timesrun]}" + f"s+{parentheseslist[1] * distributelist1[timesrun]}x"
                 timesrun = timesrun + 1
             else:
                 solves = solves + piece
@@ -189,4 +196,4 @@ def sloveX(equation):
     return f"x = {answer}"
 
 
-print(sloveX("5=2(1)3+x"))
+print(sloveX("5=(1)+x"))
