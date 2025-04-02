@@ -647,5 +647,3 @@ def solve_x(equation):
         color = "red"
         solved = "Please type in a valid\n equation"
 
-
-
