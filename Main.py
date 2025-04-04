@@ -116,12 +116,12 @@ class App(customtkinter.CTk):
                 box2.grid_remove()
                 label1.configure(text="Pemdas Eqaution")
                 box1.configure(placeholder_text="1+2(3*4)^5")
-            elif choice == "factor_trinomials":
+            elif choice == "factor trinomials":
                 label1.grid(row=2, column=0)
                 box1.grid(row=3, column=0, pady=5)
                 label2.grid_remove()
                 box2.grid_remove()
-                label1.configure(text="Pemdas Eqaution")
+                label1.configure(text="Trinomial Eqaution")
                 box1.configure(placeholder_text="4x^2 + 28x + 49")
             elif choice == "solve for x":
                 label1.grid(row=2, column=0)
@@ -177,7 +177,7 @@ class App(customtkinter.CTk):
                                        anchor="center")
         combobox = customtkinter.CTkComboBox(master=self,
                                              width=140,
-                                             values=["slope from two points", "point slope to slope intercept","transformation","find intercept","standard to slope intercept","slope intercept to standard","pemdas","solve for x","factor_trinomials"],
+                                             values=["slope from two points", "point slope to slope intercept","transformation","find intercept","standard to slope intercept","slope intercept to standard","pemdas","solve for x","factor trinomials"],
                                              command=combobox_callback,
                                              variable=combobox_var
                                              )
